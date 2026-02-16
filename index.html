@@ -710,6 +710,8 @@
       var isLoading = false;
       var activeTocLink = null;
       var contentSelectMode = false;
+      var mediaAssetUrlCache = new Map();
+      var mediaAssetObjectUrls = [];
 
       fileInput.addEventListener("change", function (event) {
         var file = event.target.files && event.target.files[0];
@@ -774,6 +776,7 @@
         try {
           assertJsZipLoaded();
           setStatus("Reading file...");
+          revokeMediaAssetUrls();
           clearRender();
 
           var buffer = await file.arrayBuffer();
@@ -817,6 +820,7 @@
           );
           enterViewerMode();
         } catch (error) {
+          revokeMediaAssetUrls();
           document.title = "EPUB Memory Viewer";
           setStatus(error && error.message ? error.message : String(error));
           tocWrap.innerHTML = "<div class=\"placeholder\">TOC parsing failed.</div>";
@@ -961,6 +965,13 @@
               throw new Error("File not found: " + path);
             }
             return zip.file(real).async("string");
+          },
+          readBinary: async function (path) {
+            var real = this.resolve(path);
+            if (!real) {
+              throw new Error("File not found: " + path);
+            }
+            return zip.file(real).async("uint8array");
           }
         };
       }
@@ -1157,6 +1168,7 @@
         var manifest = opfInfo.manifest;
         var spine = opfInfo.spine;
         var titleByPath = buildTocTitleMap(tocData.items, tocData.baseDir);
+        var mediaTypeByPath = buildMediaTypeByPath(manifest, opfDir);
         var chapters = [];
 
         for (var i = 0; i < spine.length; i += 1) {
@@ -1185,7 +1197,7 @@
 
           var heading = titleByPath.get(path) || extractFirstHeading(chapterText) || stripExt(path.split("/").pop() || ("chapter-" + (i + 1)));
           var sectionPrefix = "ch" + (i + 1);
-          var prepared = prepareChapterHtml(bodyHtml, sectionPrefix);
+          var prepared = await prepareChapterHtml(bodyHtml, sectionPrefix, resolver, dirname(path), mediaTypeByPath);
 
           chapters.push({
             index: i + 1,
@@ -1772,7 +1784,7 @@
         return "";
       }
 
-      function prepareChapterHtml(rawHtml, prefix) {
+      async function prepareChapterHtml(rawHtml, prefix, resolver, chapterDir, mediaTypeByPath) {
         var parser = new DOMParser();
         var doc = parser.parseFromString("<!DOCTYPE html><html><body><div id=\"root\"></div></body></html>", "text/html");
         var root = doc.getElementById("root");
@@ -1805,12 +1817,215 @@
           }
         }
 
+        await rewriteEmbeddedMediaUrls(root, resolver, chapterDir, mediaTypeByPath);
         trimEmptyEdges(root, 12);
 
         return {
           html: root.innerHTML,
           idMap: idMap
         };
+      }
+
+      async function rewriteEmbeddedMediaUrls(root, resolver, chapterDir, mediaTypeByPath) {
+        if (!root || !resolver) {
+          return;
+        }
+
+        var attrTasks = [];
+        var srcNodes = root.querySelectorAll("img[src],source[src],video[src],audio[src]");
+        for (var i = 0; i < srcNodes.length; i += 1) {
+          attrTasks.push(rewriteMediaAttr(srcNodes[i], "src", resolver, chapterDir, mediaTypeByPath));
+        }
+
+        var posterNodes = root.querySelectorAll("video[poster]");
+        for (var j = 0; j < posterNodes.length; j += 1) {
+          attrTasks.push(rewriteMediaAttr(posterNodes[j], "poster", resolver, chapterDir, mediaTypeByPath));
+        }
+
+        var svgImageNodes = root.querySelectorAll("image[href],image[xlink\\:href]");
+        for (var k = 0; k < svgImageNodes.length; k += 1) {
+          if (svgImageNodes[k].hasAttribute("href")) {
+            attrTasks.push(rewriteMediaAttr(svgImageNodes[k], "href", resolver, chapterDir, mediaTypeByPath));
+          }
+          if (svgImageNodes[k].hasAttribute("xlink:href")) {
+            attrTasks.push(rewriteMediaAttr(svgImageNodes[k], "xlink:href", resolver, chapterDir, mediaTypeByPath));
+          }
+        }
+
+        await Promise.all(attrTasks);
+
+        var srcsetNodes = root.querySelectorAll("img[srcset],source[srcset]");
+        for (var n = 0; n < srcsetNodes.length; n += 1) {
+          var srcset = srcsetNodes[n].getAttribute("srcset") || "";
+          var rewrittenSrcset = await rewriteSrcsetValue(srcset, resolver, chapterDir, mediaTypeByPath);
+          if (rewrittenSrcset) {
+            srcsetNodes[n].setAttribute("srcset", rewrittenSrcset);
+          }
+        }
+      }
+
+      async function rewriteMediaAttr(node, attrName, resolver, chapterDir, mediaTypeByPath) {
+        if (!node || !attrName) {
+          return;
+        }
+
+        var raw = (node.getAttribute(attrName) || "").trim();
+        if (!raw) {
+          return;
+        }
+
+        var rewritten = await resolveEmbeddedMediaUrl(raw, resolver, chapterDir, mediaTypeByPath);
+        if (rewritten) {
+          node.setAttribute(attrName, rewritten);
+        }
+      }
+
+      async function rewriteSrcsetValue(value, resolver, chapterDir, mediaTypeByPath) {
+        var input = (value || "").trim();
+        if (!input) {
+          return "";
+        }
+
+        var entries = input.split(",");
+        var out = [];
+        for (var i = 0; i < entries.length; i += 1) {
+          var token = entries[i].trim();
+          if (!token) {
+            continue;
+          }
+
+          var splitAt = token.search(/\s/);
+          var urlPart = splitAt < 0 ? token : token.slice(0, splitAt);
+          var descriptor = splitAt < 0 ? "" : token.slice(splitAt).trim();
+          var rewritten = await resolveEmbeddedMediaUrl(urlPart, resolver, chapterDir, mediaTypeByPath);
+
+          if (!rewritten) {
+            out.push(token);
+            continue;
+          }
+          out.push(descriptor ? rewritten + " " + descriptor : rewritten);
+        }
+
+        return out.join(", ");
+      }
+
+      async function resolveEmbeddedMediaUrl(rawUrl, resolver, chapterDir, mediaTypeByPath) {
+        var parsed = splitResourceUrl(rawUrl || "");
+        if (!parsed.path || isNonLocalUrl(parsed.path)) {
+          return "";
+        }
+
+        var resolvedPath = resolveRelative(chapterDir || "", parsed.path);
+        if (!resolvedPath || !resolver.has(resolvedPath)) {
+          return "";
+        }
+
+        var mediaUrl = await getOrCreateMediaAssetUrl(resolver, resolvedPath, mediaTypeByPath);
+        if (!mediaUrl) {
+          return "";
+        }
+
+        return mediaUrl + parsed.suffix;
+      }
+
+      function splitResourceUrl(raw) {
+        var text = (raw || "").trim();
+        var hashIdx = text.indexOf("#");
+        var beforeHash = hashIdx >= 0 ? text.slice(0, hashIdx) : text;
+        var hashSuffix = hashIdx >= 0 ? text.slice(hashIdx) : "";
+
+        var queryIdx = beforeHash.indexOf("?");
+        var path = queryIdx >= 0 ? beforeHash.slice(0, queryIdx) : beforeHash;
+        var querySuffix = queryIdx >= 0 ? beforeHash.slice(queryIdx) : "";
+
+        return {
+          path: path,
+          suffix: querySuffix + hashSuffix
+        };
+      }
+
+      function isNonLocalUrl(path) {
+        var value = (path || "").trim().toLowerCase();
+        if (!value) {
+          return true;
+        }
+        if (value.indexOf("//") === 0) {
+          return true;
+        }
+        if (value.indexOf("data:") === 0 || value.indexOf("blob:") === 0 || value.indexOf("#") === 0) {
+          return true;
+        }
+        if (/^[a-z][a-z0-9+.-]*:/.test(value)) {
+          return true;
+        }
+        return false;
+      }
+
+      async function getOrCreateMediaAssetUrl(resolver, path, mediaTypeByPath) {
+        var normPath = normalizePath(path);
+        if (mediaAssetUrlCache.has(normPath)) {
+          return mediaAssetUrlCache.get(normPath);
+        }
+
+        try {
+          var bytes = await resolver.readBinary(normPath);
+          var mediaType = (mediaTypeByPath && mediaTypeByPath.get(normPath)) || guessMediaType(normPath);
+          var blob = new Blob([bytes], { type: mediaType || "application/octet-stream" });
+          var objectUrl = URL.createObjectURL(blob);
+          mediaAssetUrlCache.set(normPath, objectUrl);
+          mediaAssetObjectUrls.push(objectUrl);
+          return objectUrl;
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function revokeMediaAssetUrls() {
+        for (var i = 0; i < mediaAssetObjectUrls.length; i += 1) {
+          try {
+            URL.revokeObjectURL(mediaAssetObjectUrls[i]);
+          } catch (error) {
+            // Ignore revoke failures for stale object URLs.
+          }
+        }
+        mediaAssetObjectUrls = [];
+        mediaAssetUrlCache.clear();
+      }
+
+      function buildMediaTypeByPath(manifest, opfDir) {
+        var map = new Map();
+        if (!manifest || !manifest.forEach) {
+          return map;
+        }
+
+        manifest.forEach(function (item) {
+          if (!item || !item.href) {
+            return;
+          }
+          var path = resolveRelative(opfDir || "", item.href);
+          map.set(path, item.mediaType || "");
+        });
+        return map;
+      }
+
+      function guessMediaType(path) {
+        var lower = (path || "").toLowerCase();
+        if (/\.avif$/.test(lower)) { return "image/avif"; }
+        if (/\.bmp$/.test(lower)) { return "image/bmp"; }
+        if (/\.gif$/.test(lower)) { return "image/gif"; }
+        if (/\.ico$/.test(lower)) { return "image/x-icon"; }
+        if (/\.jpe?g$/.test(lower)) { return "image/jpeg"; }
+        if (/\.png$/.test(lower)) { return "image/png"; }
+        if (/\.svg$/.test(lower)) { return "image/svg+xml"; }
+        if (/\.tiff?$/.test(lower)) { return "image/tiff"; }
+        if (/\.webp$/.test(lower)) { return "image/webp"; }
+        if (/\.mp3$/.test(lower)) { return "audio/mpeg"; }
+        if (/\.m4a$/.test(lower)) { return "audio/mp4"; }
+        if (/\.ogg$/.test(lower)) { return "audio/ogg"; }
+        if (/\.wav$/.test(lower)) { return "audio/wav"; }
+        if (/\.mp4$/.test(lower)) { return "video/mp4"; }
+        if (/\.webm$/.test(lower)) { return "video/webm"; }
+        return "application/octet-stream";
       }
 
       function trimEmptyEdges(root, maxCount) {
