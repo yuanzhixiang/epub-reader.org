@@ -135,6 +135,7 @@
     }
 
     .hero-container {
+      width: 100%;
       max-width: 800px;
       margin: 0 auto;
     }
@@ -188,6 +189,7 @@
 
     /* Upload Card */
     .upload-card {
+      width: 100%;
       background: var(--bg-white);
       border-radius: 24px;
       padding: 40px;
@@ -204,11 +206,16 @@
     .drop-zone {
       border: 2px dashed #D6CCC2;
       border-radius: 16px;
+      min-height: 250px;
       padding: 40px 20px;
       background: #FFFEFC;
       transition: all 0.2s ease;
       cursor: pointer;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .drop-zone:hover, .drop-zone.dragover {
@@ -496,6 +503,10 @@
       .hero-section { padding: 40px 20px; }
       .hero-title { font-size: 32px; }
       .upload-card { padding: 24px; }
+      .drop-zone {
+        min-height: 200px;
+        padding: 32px 18px;
+      }
     }
   </style>
 </head>
@@ -516,7 +527,7 @@
       <div class="hero-container">
         <h1 class="hero-title">epub reader</h1>
         <p class="hero-subtitle">
-          This epub reader is built for long-form books, manuals, and knowledge files. Drop one EPUB file and the app switches to an in-memory reading workflow with nested TOC navigation and continuous chapter rendering in seconds. If you need an epub reader online that runs instantly in the browser, this flow is designed for that exact use case.
+          Upload one EPUB file and start reading instantly in your browser.
         </p>
 
         <div class="upload-card">
@@ -525,7 +536,7 @@
             <svg class="drop-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            <p class="drop-hint">Drag and drop your EPUB file here, or choose a file manually to launch the epub reader online experience.</p>
+            <p class="drop-hint">Drag and drop an EPUB file here to begin.</p>
             <input id="fileInput" type="file" accept=".epub,application/epub+zip" title="Select EPUB file" />
           </div>
           <p id="statusInline" class="status-inline" style="text-align: center; color: var(--accent-primary); font-weight: 500; padding-top: 20px;">Choose an .epub file to begin.</p>
