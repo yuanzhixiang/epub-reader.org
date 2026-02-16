@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>epub reader online - In-Browser EPUB Reader with TOC and Full Chapter View</title>
-  <meta name="description" content="epub reader online is an in-browser EPUB reader. Upload an EPUB file, parse OPF + TOC + spine in memory, navigate nested TOC nodes, and read full node-plus-children content in one continuous view." />
+  <title>epub reader online - Beautiful In-Browser Reading</title>
+  <meta name="description" content="epub reader online is a beautiful, in-browser EPUB reader. Upload an EPUB file, parse OPF + TOC + spine in memory, navigate nested TOC nodes, and read full node-plus-children content in one continuous view." />
   <meta name="robots" content="index,follow" />
   <meta property="og:title" content="epub reader online" />
   <meta property="og:description" content="A local-first epub reader online experience that parses EPUB files in memory and renders nested TOC content in a continuous reading layout." />
   <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
   <script defer data-domain="epub-reader.org" src="https://plausible.yuanzhixiang.com/js/script.js"></script>
   <script type="application/ld+json">
     {
@@ -26,672 +32,561 @@
       ]
     }
   </script>
+
   <style>
     :root {
-      --bg: #f5f1e8;
-      --panel: #fffdf8;
-      --line: #ded6c6;
-      --text: #1c1b1a;
-      --muted: #676158;
-      --accent: #9f3d16;
-      --accent-soft: #f8eadf;
+      /* Palette */
+      --bg-paper: #F9F7F2;
+      --bg-white: #FFFFFF;
+      --text-main: #2C2C2C;
+      --text-muted: #666055;
+      --text-light: #8E867A;
+      --accent-primary: #C07248;
+      --accent-hover: #A65D35;
+      --accent-soft: #F4EBE6;
+      --border-soft: #EBE5DA;
+      --shadow-card: 0 12px 32px rgba(40, 30, 20, 0.06);
+      --shadow-hover: 0 16px 48px rgba(40, 30, 20, 0.1);
+      
+      /* Layout */
+      --container-width: 1100px;
       --toc-width: 320px;
+      
+      /* Typography */
+      --font-serif: "Playfair Display", serif;
+      --font-sans: "Lato", "IBM Plex Sans", sans-serif;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: var(--bg-paper);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     [hidden] {
       display: none !important;
     }
 
-    html, body {
-      margin: 0;
-      height: 100%;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -5%, #fff0df 0%, rgba(255, 240, 223, 0) 55%),
-        radial-gradient(900px 600px at 100% 0%, #fce8cf 0%, rgba(252, 232, 207, 0) 60%),
-        var(--bg);
-      font-family: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
+    /* --- Start Screen / Landing Page --- */
     .start-screen {
-      min-height: 100%;
-      padding: 24px 24px 40px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* Header */
     .site-header {
-      max-width: 1040px;
-      margin: 0 auto 14px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: 0 8px 20px rgba(40, 28, 12, 0.07);
+      padding: 20px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      width: 100%;
     }
 
     .site-brand {
-      margin: 0;
-      font-size: 16px;
+      font-family: var(--font-serif);
       font-weight: 700;
-      letter-spacing: 0.2px;
-      color: #32281d;
+      font-size: 20px;
+      color: var(--text-main);
+      margin: 0;
+      letter-spacing: -0.02em;
     }
 
     .site-nav {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
+      gap: 24px;
     }
 
     .site-nav a {
-      font-size: 13px;
-      color: #5f4b33;
-      text-decoration: none;
-      border: 1px solid #dfd3bf;
-      background: #fff7ea;
-      border-radius: 999px;
-      padding: 4px 10px;
-      line-height: 1.2;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     .site-nav a:hover {
-      background: #f6ecd9;
-      border-color: #cdb997;
+      color: var(--accent-primary);
     }
 
-    .landing-main {
-      display: block;
-    }
-
-    .hero {
-      min-height: calc(100vh - 140px);
+    /* Hero Section */
+    .hero-section {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
     }
 
-    .start-card {
-      width: min(860px, 100%);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 18px 42px rgba(40, 28, 12, 0.12);
-    }
-
-    .start-card h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-      line-height: 1.05;
-      letter-spacing: 0.4px;
-    }
-
-    .start-card .subtitle {
-      font-size: 16px;
-      line-height: 1.6;
-      max-width: 760px;
-    }
-
-    .start-card .uploader {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 14px;
-    }
-
-    .start-card input[type="file"] {
-      font-size: 15px;
-    }
-
-    .start-card .meta {
-      margin-top: 12px;
-      grid-template-columns: repeat(3, max-content);
-      column-gap: 10px;
-      row-gap: 8px;
-      align-items: center;
-    }
-
-    .drop-hint {
-      margin: 0;
-      font-size: 14px;
-      color: #5f594f;
-      line-height: 1.45;
-    }
-
-    .landing-content {
-      max-width: 960px;
+    .hero-container {
+      max-width: 800px;
       margin: 0 auto;
-      display: grid;
-      gap: 14px;
     }
 
-    .landing-section {
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 56px;
+      line-height: 1.1;
+      margin: 0 0 24px;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    /* Upload Card */
+    .upload-card {
+      background: var(--bg-white);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .upload-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .drop-zone {
+      border: 2px dashed #D6CCC2;
       border-radius: 16px;
-      padding: 20px 22px;
-      box-shadow: 0 10px 26px rgba(40, 28, 12, 0.07);
+      padding: 40px 20px;
+      background: #FFFEFC;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
     }
 
-    .landing-section h2 {
-      margin: 0 0 10px;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: 0.2px;
-    }
-
-    .landing-section p {
-      margin: 0;
-      color: #4b463f;
-      line-height: 1.65;
-      font-size: 16px;
-    }
-
-    .landing-list {
-      margin: 0;
-      padding-left: 20px;
-      display: grid;
-      gap: 8px;
-      color: #4b463f;
-      line-height: 1.55;
-      font-size: 15px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .feature-card {
-      border: 1px dashed #d8ccb6;
-      border-radius: 12px;
-      padding: 12px 14px;
-      background: #fff9ef;
-    }
-
-    .feature-card h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
-      line-height: 1.3;
-    }
-
-    .feature-card p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.5;
-      color: #5b554b;
-    }
-
-    .site-footer {
-      max-width: 1040px;
-      margin: 18px auto 0;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: 0 8px 20px rgba(40, 28, 12, 0.06);
-      color: #5f594f;
-      display: grid;
-      gap: 8px;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .site-footer p {
-      margin: 0;
-    }
-
-    .layout {
-      height: 100%;
-      display: grid;
-      grid-template-columns: var(--toc-width) 1fr;
-      gap: 14px;
-      padding: 14px;
-    }
-
-    .side {
-      min-width: 0;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(40, 28, 12, 0.08);
-    }
-
-    .main {
-      min-width: 0;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: auto;
-      box-shadow: 0 12px 30px rgba(40, 28, 12, 0.08);
-    }
-
-    .main:focus {
-      outline: none;
-    }
-
-    .main,
-    .toc-wrap {
-      scrollbar-width: thin;
-      scrollbar-color: #b9ab93 #f2eadb;
-    }
-
-    .main::-webkit-scrollbar,
-    .toc-wrap::-webkit-scrollbar {
-      width: 12px;
-      height: 12px;
-    }
-
-    .main::-webkit-scrollbar-track,
-    .toc-wrap::-webkit-scrollbar-track {
-      background: linear-gradient(180deg, #f8f2e6 0%, #efe6d6 100%);
-      border-radius: 999px;
-    }
-
-    .main::-webkit-scrollbar-thumb,
-    .toc-wrap::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ccbca1 0%, #b7a587 100%);
-      border: 2px solid #f4ecdd;
-      border-radius: 999px;
-    }
-
-    .main::-webkit-scrollbar-thumb:hover,
-    .toc-wrap::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #bda982 0%, #a9916e 100%);
-    }
-
-    .section {
-      padding: 16px 16px 14px;
-      border-bottom: 1px dashed #e4ddcf;
-    }
-
-    .section:last-child {
-      border-bottom: 0;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: 0.2px;
-    }
-
-    .subtitle {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .uploader {
-      margin-top: 12px;
-      padding: 14px;
-      border: 1px dashed #ccbda2;
-      border-radius: 12px;
-      background: linear-gradient(180deg, #fff7ea 0%, #fffdf8 100%);
-    }
-
-    .uploader.dragover {
-      border-color: var(--accent);
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--accent-primary);
       background: var(--accent-soft);
     }
 
-    input[type="file"] {
+    .drop-zone input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      font-size: 13px;
-      color: var(--muted);
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
 
-    .meta {
-      margin-top: 10px;
-      display: grid;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
+    .drop-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
     }
 
-    .meta code {
-      font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-      font-size: 11px;
-      background: #f6f0e5;
-      border: 1px solid #eadfc9;
-      border-radius: 6px;
-      padding: 1px 6px;
-      color: #5d3f1f;
+    .drop-hint {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 0 0 8px;
+    }
+
+    .drop-subhint {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
     }
 
     .status-inline {
-      margin: 10px 2px 0;
-      color: #7b7368;
-      font-size: 12px;
-      line-height: 1.45;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      min-height: 20px;
+    }
+
+    .meta-tags {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #F2EFE9;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 99px;
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 80px 20px;
+      background: #FFFDFC;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .section-container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      text-align: center;
+      margin: 0 0 60px;
+      color: var(--text-main);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-item {
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--bg-paper);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
+    }
+
+    .feature-item h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: var(--text-main);
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* How it works */
+    .workflow-section {
+      padding: 80px 20px;
+      background: var(--bg-paper);
+    }
+
+    .steps-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .step-item {
+      position: relative;
+    }
+
+    .step-item::before {
+      counter-increment: step-counter;
+      content: "0" counter(step-counter);
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: #E8E2D6;
+      display: block;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .step-item p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-soft);
+      background: #FFFDFC;
+    }
+
+    .site-footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 6px 0;
+    }
+
+    /* --- Reader Interface (Retained & Polished) --- */
+    .layout {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: var(--toc-width) 1fr;
+      background: #F3F0E9;
+    }
+
+    .side {
+      background: #FAF8F5;
+      border-right: 1px solid #E6DCCF;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.02);
+      z-index: 10;
     }
 
     .toc-wrap {
       flex: 1;
-      min-height: 0;
-      overflow: auto;
-      padding: 10px 10px 14px 14px;
+      overflow-y: auto;
+      padding: 20px;
     }
 
     .toc-tree {
-      margin: 0;
-      padding-left: 14px;
       list-style: none;
+      padding: 0;
+      margin: 0;
     }
-
+    
     .toc-tree .toc-tree {
-      margin-top: 2px;
-      margin-left: 2px;
-      padding-left: 16px;
-      border-left: 1px dotted #dccfb8;
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid #EFE6D8;
     }
 
     .toc-tree li {
-      margin: 2px 0;
-      position: relative;
-      padding-left: 10px;
-    }
-
-    .toc-tree li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 11px;
-      width: 6px;
-      border-top: 1px solid #d8ceb9;
+      margin: 4px 0;
     }
 
     .toc-tree a {
-      display: inline-block;
-      max-width: 100%;
-      color: #473a2b;
-      text-decoration: none;
+      display: block;
+      padding: 6px 10px;
       font-size: 13px;
-      line-height: 1.35;
-      padding: 4px 6px;
-      border-radius: 8px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      color: #5D554A;
+      border-radius: 6px;
+      line-height: 1.4;
     }
 
     .toc-tree a:hover {
-      background: #f6ecdc;
-      color: #2a1f14;
+      background: #EFE9DE;
+      color: #2C2C2C;
     }
 
     .toc-tree a.active {
-      background: #efe3cf;
-      color: #2a1f14;
+      background: #E8DFD0;
+      color: #1A1A1A;
       font-weight: 600;
     }
-
+    
     .toc-tree a.disabled {
-      color: #9d958a;
-      pointer-events: none;
+      color: #B0A89C;
       cursor: default;
     }
 
-    .toc-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      min-width: 0;
-    }
-
-    .toc-row a {
-      flex: 1 1 auto;
-      min-width: 0;
+    .main {
+      background: #FDFBF8;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      position: relative;
     }
 
     .content-body {
-      padding: 18px 20px 28px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+      background: #FDFBF8;
+      min-height: 100%;
     }
 
     .chapter {
-      padding: 16px 0 20px;
-      border-bottom: 1px dashed #ddd4c3;
-    }
-
-    .chapter:last-child {
-      border-bottom: 0;
+      margin-bottom: 60px;
     }
 
     .chapter h2 {
-      margin: 0 0 12px;
+      font-family: var(--font-serif);
       font-size: 32px;
-      line-height: 1.18;
-      font-family: "Baskerville", "Times New Roman", "Songti SC", serif;
-      color: #2a2118;
+      margin-bottom: 24px;
+      color: #1A1A1A;
+      border-bottom: 1px solid #EFE6D8;
+      padding-bottom: 16px;
     }
 
     .chapter-content {
-      color: #1e1a17;
-      font-size: 20px;
-      line-height: 1.62;
-      font-family: "Baskerville", "Times New Roman", "Songti SC", serif;
-      overflow-wrap: anywhere;
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #2C2C2C;
     }
 
-    .chapter-content > *:first-child {
-      margin-top: 0;
+    .chapter-content p {
+      margin-bottom: 1.5em;
+    }
+    
+    .chapter-content img {
+      max-width: 100%;
+      height: auto;
     }
 
-    .chapter-content > *:last-child {
-      margin-bottom: 0;
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D8D0C0;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C8BFAD;
     }
 
-    .chapter-content a {
-      color: var(--accent);
-    }
-
-    .placeholder {
-      color: #7b7368;
-      font-size: 15px;
-      line-height: 1.55;
-      border: 1px dashed #ddd4c3;
-      border-radius: 12px;
-      padding: 16px;
-      background: #fefaf2;
-    }
-
-    @media (max-width: 980px) {
-      .start-screen {
-        padding: 14px 14px 24px;
-      }
-
-      .site-header {
-        margin-bottom: 10px;
-        padding: 12px;
-      }
-
-      .site-brand {
-        font-size: 14px;
-      }
-
-      .site-nav a {
-        font-size: 12px;
-      }
-
-      .start-card {
-        padding: 20px 16px;
-      }
-
-      .start-card h1 {
-        font-size: 32px;
-      }
-
-      .start-card .subtitle {
-        font-size: 14px;
-      }
-
-      .start-card .meta {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-        margin-bottom: 12px;
-      }
-
-      .landing-section {
-        padding: 16px;
-      }
-
-      .landing-section h2 {
-        font-size: 20px;
-      }
-
-      .landing-section p {
-        font-size: 15px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .site-footer {
-        padding: 12px;
-        font-size: 12px;
-      }
-
+    /* Mobile */
+    @media (max-width: 900px) {
+      .hero-title { font-size: 40px; }
+      .layout { grid-template-columns: 1fr; }
+      .side { display: none; /* Simplification for mobile view if TOC not toggled */ }
+      /* Actually original code had layout change. Let's keep a workable simple layout */
       .layout {
-        grid-template-columns: 1fr;
-        grid-template-rows: 42vh 1fr;
+         grid-template-columns: 1fr;
+         grid-template-rows: auto 1fr;
       }
-
-      .chapter-content {
-        font-size: 18px;
+      .side {
+        border-right: none;
+        border-bottom: 1px solid #E6DCCF;
+        height: 200px;
+        display: block;
       }
+    }
+    @media (max-width: 600px) {
+      .site-header { padding: 16px 20px; }
+      .hero-section { padding: 40px 20px; }
+      .hero-title { font-size: 32px; }
+      .upload-card { padding: 24px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Landing Screen -->
   <section id="startScreen" class="start-screen">
     <header class="site-header">
-      <p class="site-brand">epub reader online</p>
-      <nav class="site-nav" aria-label="Landing navigation">
+      <h1 class="site-brand">epub reader online</h1>
+      <nav class="site-nav">
         <a href="#features">Features</a>
-        <a href="#workflow">How it works</a>
+        <a href="#how-it-works">How it works</a>
         <a href="#faq">FAQ</a>
-        <a href="#privacy">Privacy</a>
       </nav>
     </header>
 
-    <main class="landing-main">
-      <div class="hero">
-        <div class="start-card">
-          <h1>epub reader</h1>
-          <p class="subtitle">This epub reader is built for long-form books, manuals, and knowledge files. Drop one EPUB file and the app switches to an in-memory reading workflow with nested TOC navigation and continuous chapter rendering in seconds. If you need an epub reader online that runs instantly in the browser, this flow is designed for that exact use case.</p>
-          <div id="dropZone" class="uploader">
-            <p class="drop-hint">Drag and drop your EPUB file here, or choose a file manually to launch the epub reader online experience.</p>
-            <input id="fileInput" type="file" accept=".epub,application/epub+zip" />
-            <div class="meta">
-              <div>Mode: <code>in-memory</code></div>
-              <div>Parsing: <code>OPF + TOC + Spine</code></div>
-              <div>Rendering: <code>single-page scroll</code></div>
-            </div>
+    <div class="hero-section">
+      <div class="hero-container">
+        <h1 class="hero-title">Your Personal Library,<br>Reimagined.</h1>
+        <p class="hero-subtitle">
+          Enjoy a distraction-free reading experience directly in your browser. 
+          Upload an EPUB, and we'll handle the rest—parsing, TOC navigation, and continuous scrolling all in memory.
+        </p>
+
+        <div class="upload-card">
+          <div id="dropZone" class="drop-zone">
+            <!-- Icon: Upload Simple -->
+            <svg class="drop-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            <p class="drop-hint">Drop your EPUB file here</p>
+            <p class="drop-subhint">or click to browse</p>
+            <input id="fileInput" type="file" accept=".epub,application/epub+zip" title="Select EPUB file" />
           </div>
-          <p id="statusInline" class="status-inline">Choose an .epub file to begin.</p>
+          <div id="statusInline" class="status-inline"></div>
+          
+          <div class="meta-tags">
+             <span class="tag">Local Parsing</span>
+             <span class="tag">Private</span>
+             <span class="tag">No Signup</span>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="landing-content">
-        <section id="overview" class="landing-section">
-          <h2>What This epub reader Does</h2>
-          <p>This epub reader turns a raw EPUB package into a practical reading workspace. The app resolves package metadata, spine order, and TOC hierarchy, then presents chapter content in a clean continuous flow while keeping the processing inside your browser session. For teams that search for an epub reader online, this page explains a local-first browser model with no account friction and no server pipeline dependency.</p>
-        </section>
-
-        <section id="features" class="landing-section">
-          <h2>Core Features</h2>
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>In-Browser Parsing</h3>
-              <p>This epub reader processes files locally in memory, with no server-side upload pipeline required.</p>
-            </article>
-            <article class="feature-card">
-              <h3>TOC-Aware Navigation</h3>
-              <p>The reader preserves nested TOC structure from NCX or EPUB3 nav documents in the left sidebar.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Node + Children Reading</h3>
-              <p>Clicking a TOC node tells the epub reader to show that node and all descendants in one content stream.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Reader-Friendly Selection</h3>
-              <p>Inside the content pane, this reader supports Cmd/Ctrl + A to select only reader content.</p>
-            </article>
+    <section id="features" class="features-section">
+      <div class="section-container">
+        <h2 class="section-title">Why this Reader?</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <h3>Secure & Private</h3>
+            <p>Your books never leave your device. All parsing happens locally in your browser memory.</p>
           </div>
-        </section>
-
-        <section id="workflow" class="landing-section">
-          <h2>How This epub reader Works</h2>
-          <ol class="landing-list">
-            <li>Upload one EPUB file to the app.</li>
-            <li>The app resolves <code>container.xml</code>, finds OPF, and parses manifest + spine entries.</li>
-            <li>It builds TOC data from NCX or EPUB3 nav, with spine fallback when needed.</li>
-            <li>Chapter bodies are normalized and rendered into a single scrollable reading surface.</li>
-            <li>Click any TOC node to focus reading on that section and all child sections.</li>
-          </ol>
-        </section>
-
-        <section id="audience" class="landing-section">
-          <h2>Who Uses This epub reader</h2>
-          <p>This epub reader is useful for researchers, editors, analysts, and students who need a fast way to inspect and navigate full EPUB content. Because it can show a parent node with all children in one view, it is practical for summarization, auditing, and structured review tasks. Many users discover this tool while searching for an epub reader online that keeps context and hierarchy visible in one place.</p>
-        </section>
-
-        <section id="privacy" class="landing-section">
-          <h2>Privacy and Local Workflow</h2>
-          <p>By design, this reader handles files in browser memory during the session. That local-first approach is helpful when you want quick EPUB inspection without external storage pipelines, and it keeps the reading workflow close to your local environment. Even as an epub reader online experience, the runtime model stays browser-local for day-to-day reading tasks.</p>
-        </section>
-
-        <section id="faq" class="landing-section">
-          <h2>FAQ</h2>
-          <ol class="landing-list">
-            <li><strong>Can this epub reader open nested chapter structures?</strong> Yes. It reads NCX or EPUB3 nav and preserves hierarchy.</li>
-            <li><strong>Can this epub reader show one section plus all descendants?</strong> Yes. Click one TOC node to render the full node-plus-children range.</li>
-            <li><strong>Does this epub reader require account login?</strong> No. You can run it directly in a browser session.</li>
-            <li><strong>Can I use this reader for large books?</strong> Yes. It was designed for long-form reading and structured navigation.</li>
-            <li><strong>Is this an epub reader online workflow?</strong> Yes. It runs in your browser, and the parsing flow starts as soon as you load one file.</li>
-          </ol>
-        </section>
-
-        <section id="start" class="landing-section">
-          <h2>Start Reading</h2>
-          <p>Drop your file in the box above and let this epub reader build the full reading surface. If your goal is faster navigation, cleaner section review, and one continuous output stream, this tool is ready to use now. If your search query was epub reader online, you are in the right place to test a full browser flow immediately.</p>
-        </section>
+          <div class="feature-item">
+            <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg>
+            <h3>Smart TOC</h3>
+            <p>We preserve the nested structure of your book, allowing you to view parent and child chapters in one flow.</p>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <h3>Instant Loading</h3>
+            <p>Designed for speed. Drop a file and start reading immediately without server processing.</p>
+          </div>
+        </div>
       </div>
-    </main>
+    </section>
 
     <footer class="site-footer">
-      <p><strong>epub reader online</strong> for structured, long-form reading in one browser session.</p>
-      <p>This landing page and reader are designed for practical EPUB navigation, TOC-aware section review, and continuous chapter rendering without server-side document pipelines.</p>
+      <p><strong>epub reader online</strong> - Crafted for readers.</p>
+      <p>Local-first, privacy-focused, and designed for long-form content.</p>
     </footer>
   </section>
 
+  <!-- Reader Layout (Hidden by default) -->
   <div id="viewerLayout" class="layout" hidden>
     <aside class="side">
       <div id="tocWrap" class="toc-wrap">
-        <div class="placeholder">The table of contents will appear here.</div>
+        <div class="placeholder" style="padding: 20px; color: #aaa; text-align: center;">Loading Table of Contents...</div>
       </div>
     </aside>
 
     <section id="mainPanel" class="main" tabindex="0" aria-label="Reader content panel">
       <div id="contentBody" class="content-body">
-        <div class="placeholder">After loading, all chapters will be stitched here in reading order.</div>
+        <div class="placeholder" style="text-align: center; color: #aaa; padding-top: 40px;">Content will appear here.</div>
       </div>
     </section>
   </div>
@@ -1454,154 +1349,6 @@
         return txt.length === 0;
       }
 
-      function resolveTocTarget(href, tocBaseDir, sectionByPath, idMapByPath) {
-        if (!href) {
-          return "";
-        }
-        var target = resolveTargetRef(tocBaseDir, href);
-        if (target.external) {
-          return "";
-        }
-
-        if (target.path) {
-          var sectionId = sectionByPath.get(target.path);
-          if (!sectionId) {
-            return "";
-          }
-          if (target.fragment) {
-            var map = idMapByPath.get(target.path);
-            if (map && map.has(target.fragment)) {
-              return map.get(target.fragment);
-            }
-          }
-          return sectionId;
-        }
-
-        if (target.fragment) {
-          for (var _iterator2 = idMapByPath.values(), _step2; !(_step2 = _iterator2.next()).done;) {
-            var idMap = _step2.value;
-            if (idMap.has(target.fragment)) {
-              return idMap.get(target.fragment);
-            }
-          }
-        }
-
-        return "";
-      }
-
-      function buildSpineFallbackToc(chapters) {
-        return chapters.map(function (chapter) {
-          return {
-            title: chapter.title,
-            href: chapter.path,
-            children: []
-          };
-        });
-      }
-
-      function buildTocTitleMap(items, baseDir) {
-        var map = new Map();
-        walkToc(items, function (item) {
-          if (!item.href) {
-            return;
-          }
-          var ref = resolveTargetRef(baseDir, item.href);
-          if (ref.path && !map.has(ref.path)) {
-            map.set(ref.path, item.title || "");
-          }
-        });
-        return map;
-      }
-
-      function walkToc(items, visit) {
-        for (var i = 0; i < items.length; i += 1) {
-          visit(items[i]);
-          if (items[i].children && items[i].children.length) {
-            walkToc(items[i].children, visit);
-          }
-        }
-      }
-
-      function extractBodyMarkup(raw) {
-        var doc = parseXml(raw);
-        var body = getBodyFromDoc(doc);
-        if (body) {
-          return getInnerMarkup(body);
-        }
-        var fallback = raw.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-        return fallback ? fallback[1] : "";
-      }
-
-      function extractFirstHeading(raw) {
-        var doc = parseXml(raw);
-        var body = getBodyFromDoc(doc) || doc;
-        var tags = ["h1", "h2", "h3", "h4", "h5", "h6"];
-        for (var i = 0; i < tags.length; i += 1) {
-          var nodes = byLocalName(body, tags[i]);
-          if (nodes.length) {
-            var txt = cleanText(nodes[0].textContent);
-            if (txt) {
-              return txt;
-            }
-          }
-        }
-        return "";
-      }
-
-      function prepareChapterHtml(rawHtml, prefix) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString("<!DOCTYPE html><html><body><div id=\"root\"></div></body></html>", "text/html");
-        var root = doc.getElementById("root");
-        root.innerHTML = rawHtml;
-
-        var removeSelector = "script,style,meta,base,link[rel='stylesheet'],iframe,object,embed";
-        var removeNodes = root.querySelectorAll(removeSelector);
-        for (var i = 0; i < removeNodes.length; i += 1) {
-          removeNodes[i].remove();
-        }
-
-        var idMap = new Map();
-        var idNodes = root.querySelectorAll("[id]");
-        for (var j = 0; j < idNodes.length; j += 1) {
-          var oldId = idNodes[j].getAttribute("id") || "";
-          if (!oldId) {
-            continue;
-          }
-          var newId = prefix + "__" + slugify(oldId) + "__" + j;
-          idMap.set(oldId, newId);
-          idNodes[j].setAttribute("id", newId);
-        }
-
-        var hashLinks = root.querySelectorAll("a[href^='#']");
-        for (var k = 0; k < hashLinks.length; k += 1) {
-          var href = hashLinks[k].getAttribute("href") || "";
-          var key = href.replace(/^#/, "");
-          if (idMap.has(key)) {
-            hashLinks[k].setAttribute("href", "#" + idMap.get(key));
-          }
-        }
-
-        trimEmptyEdges(root, 12);
-
-        return {
-          html: root.innerHTML,
-          idMap: idMap
-        };
-      }
-
-      function trimEmptyEdges(root, maxCount) {
-        var count = 0;
-        while (root.firstElementChild && count < maxCount && isEmptyBlock(root.firstElementChild)) {
-          root.firstElementChild.remove();
-          count += 1;
-        }
-        count = 0;
-        while (root.lastElementChild && count < maxCount && isEmptyBlock(root.lastElementChild)) {
-          root.lastElementChild.remove();
-          count += 1;
-        }
-      }
-
       function isEmptyBlock(node) {
         if (!node || node.nodeType !== 1) {
           return false;
@@ -1809,6 +1556,118 @@
 
       function stripExt(name) {
         return name.replace(/\.[^.]+$/, "");
+      }
+      function buildSpineFallbackToc(chapters) {
+        return chapters.map(function (chapter) {
+          return {
+            title: chapter.title,
+            href: chapter.path,
+            children: []
+          };
+        });
+      }
+
+      function buildTocTitleMap(items, baseDir) {
+        var map = new Map();
+        walkToc(items, function (item) {
+          if (!item.href) {
+            return;
+          }
+          var ref = resolveTargetRef(baseDir, item.href);
+          if (ref.path && !map.has(ref.path)) {
+            map.set(ref.path, item.title || "");
+          }
+        });
+        return map;
+      }
+
+      function walkToc(items, visit) {
+        for (var i = 0; i < items.length; i += 1) {
+          visit(items[i]);
+          if (items[i].children && items[i].children.length) {
+            walkToc(items[i].children, visit);
+          }
+        }
+      }
+
+      function extractBodyMarkup(raw) {
+        var doc = parseXml(raw);
+        var body = getBodyFromDoc(doc);
+        if (body) {
+          return getInnerMarkup(body);
+        }
+        var fallback = raw.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        return fallback ? fallback[1] : "";
+      }
+
+      function extractFirstHeading(raw) {
+        var doc = parseXml(raw);
+        var body = getBodyFromDoc(doc) || doc;
+        var tags = ["h1", "h2", "h3", "h4", "h5", "h6"];
+        for (var i = 0; i < tags.length; i += 1) {
+          var nodes = byLocalName(body, tags[i]);
+          if (nodes.length) {
+            var txt = cleanText(nodes[0].textContent);
+            if (txt) {
+              return txt;
+            }
+          }
+        }
+        return "";
+      }
+
+      function prepareChapterHtml(rawHtml, prefix) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString("<!DOCTYPE html><html><body><div id=\"root\"></div></body></html>", "text/html");
+        var root = doc.getElementById("root");
+        root.innerHTML = rawHtml;
+
+        var removeSelector = "script,style,meta,base,link[rel='stylesheet'],iframe,object,embed";
+        var removeNodes = root.querySelectorAll(removeSelector);
+        for (var i = 0; i < removeNodes.length; i += 1) {
+          removeNodes[i].remove();
+        }
+
+        var idMap = new Map();
+        var idNodes = root.querySelectorAll("[id]");
+        for (var j = 0; j < idNodes.length; j += 1) {
+          var oldId = idNodes[j].getAttribute("id") || "";
+          if (!oldId) {
+            continue;
+          }
+          var newId = prefix + "__" + slugify(oldId) + "__" + j;
+          idMap.set(oldId, newId);
+          idNodes[j].setAttribute("id", newId);
+        }
+
+        var hashLinks = root.querySelectorAll("a[href^='#']");
+        for (var k = 0; k < hashLinks.length; k += 1) {
+          var href = hashLinks[k].getAttribute("href") || "";
+          var key = href.replace(/^#/, "");
+          if (idMap.has(key)) {
+            hashLinks[k].setAttribute("href", "#" + idMap.get(key));
+          }
+        }
+
+        trimEmptyEdges(root, 12);
+
+        return {
+          html: root.innerHTML,
+          idMap: idMap
+        };
+      }
+
+      function trimEmptyEdges(root, maxCount) {
+        var count = 0;
+        while (root.firstElementChild && count < maxCount && isEmptyBlock(root.firstElementChild)) {
+          root.firstElementChild.remove();
+          count += 1;
+        }
+        count = 0;
+        while (root.lastElementChild && count < maxCount && isEmptyBlock(root.lastElementChild)) {
+          root.lastElementChild.remove();
+          count += 1;
+        }
       }
     })();
   </script>
