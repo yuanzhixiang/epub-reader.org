@@ -713,6 +713,9 @@
       var contentSelectMode = false;
       var mediaAssetUrlCache = new Map();
       var mediaAssetObjectUrls = [];
+      var allChaptersByPath = new Map();
+      var allIdMapByPath = new Map();
+      var renderedSectionByPath = new Map();
 
       fileInput.addEventListener("change", function (event) {
         var file = event.target.files && event.target.files[0];
@@ -767,6 +770,8 @@
         selectContentArea(contentBody);
       });
 
+      contentBody.addEventListener("click", handleContentLinkClick);
+
       async function loadEpub(file) {
         if (isLoading) {
           return;
@@ -807,6 +812,7 @@
           if (chapters.length === 0) {
             throw new Error("No displayable chapters found (empty spine or missing chapter files).");
           }
+          cacheChapterState(chapters);
 
           setStatus("Rendering page...");
           var sectionMaps = renderChapters(chapters);
@@ -907,8 +913,22 @@
       }
 
       function clearRender() {
+        activeTocLink = null;
+        renderedSectionByPath = new Map();
+        allChaptersByPath = new Map();
+        allIdMapByPath = new Map();
         tocWrap.innerHTML = "<div class=\"placeholder\">Building table of contents...</div>";
         contentBody.innerHTML = "<div class=\"placeholder\">Building full content...</div>";
+      }
+
+      function cacheChapterState(chapters) {
+        allChaptersByPath = new Map();
+        allIdMapByPath = new Map();
+        for (var i = 0; i < chapters.length; i += 1) {
+          var chapter = chapters[i];
+          allChaptersByPath.set(chapter.path, chapter);
+          allIdMapByPath.set(chapter.path, chapter.idMap || new Map());
+        }
       }
 
       function humanizeTocSource(source) {
@@ -1225,6 +1245,7 @@
           var article = document.createElement("article");
           article.className = "chapter";
           article.id = sectionId;
+          article.setAttribute("data-chapter-path", chapter.path);
 
           var h2 = document.createElement("h2");
           h2.textContent = displayTitle;
@@ -1232,6 +1253,7 @@
 
           var content = document.createElement("div");
           content.className = "chapter-content";
+          content.setAttribute("data-chapter-path", chapter.path);
           content.innerHTML = removeDuplicateLeadingHeading(chapter.html, displayTitle);
           article.appendChild(content);
 
@@ -1239,6 +1261,8 @@
           sectionByPath.set(chapter.path, sectionId);
           idMapByPath.set(chapter.path, chapter.idMap);
         }
+
+        renderedSectionByPath = sectionByPath;
 
         return {
           sectionByPath: sectionByPath,
@@ -1315,10 +1339,11 @@
         });
       }
 
-      function renderSelectedChapters(refs, chapterByPath) {
+      function renderSelectedChapters(refs, chapterByPath, options) {
         contentBody.innerHTML = "";
 
         var rendered = 0;
+        var sectionByPath = new Map();
         for (var i = 0; i < refs.length; i += 1) {
           var ref = refs[i];
           var chapter = chapterByPath.get(ref.path);
@@ -1330,6 +1355,7 @@
           var article = document.createElement("article");
           article.className = "chapter";
           article.id = "selected-" + slugify(chapter.path) + "-" + i;
+          article.setAttribute("data-chapter-path", chapter.path);
 
           var h2 = document.createElement("h2");
           h2.textContent = displayTitle;
@@ -1337,23 +1363,124 @@
 
           var content = document.createElement("div");
           content.className = "chapter-content";
+          content.setAttribute("data-chapter-path", chapter.path);
           content.innerHTML = removeDuplicateLeadingHeading(chapter.html, displayTitle);
           article.appendChild(content);
 
           contentBody.appendChild(article);
+          sectionByPath.set(chapter.path, article.id);
           rendered += 1;
         }
+
+        renderedSectionByPath = sectionByPath;
 
         if (!rendered) {
           contentBody.innerHTML = "<div class=\"placeholder\">No displayable chapter content under this node.</div>";
         }
 
-        var mainPanel = contentBody.parentElement;
-        if (mainPanel && typeof mainPanel.scrollTo === "function") {
-          mainPanel.scrollTo({ top: 0, behavior: "smooth" });
-        } else if (mainPanel) {
-          mainPanel.scrollTop = 0;
+        if (!options || !options.skipTopScroll) {
+          var mainPanel = contentBody.parentElement;
+          if (mainPanel && typeof mainPanel.scrollTo === "function") {
+            mainPanel.scrollTo({ top: 0, behavior: "smooth" });
+          } else if (mainPanel) {
+            mainPanel.scrollTop = 0;
+          }
         }
+      }
+
+      function handleContentLinkClick(event) {
+        if (!event || event.defaultPrevented || event.button !== 0) {
+          return;
+        }
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+          return;
+        }
+        if (!event.target || typeof event.target.closest !== "function") {
+          return;
+        }
+
+        var link = event.target.closest("a[href]");
+        if (!link || !contentBody.contains(link)) {
+          return;
+        }
+
+        var href = (link.getAttribute("href") || "").trim();
+        if (!href) {
+          return;
+        }
+        if ((link.getAttribute("target") || "").toLowerCase() === "_blank") {
+          return;
+        }
+
+        var sourcePath = "";
+        var contentNode = link.closest(".chapter-content[data-chapter-path]");
+        if (contentNode) {
+          sourcePath = contentNode.getAttribute("data-chapter-path") || "";
+        }
+
+        var ref = resolveTargetRef(dirname(sourcePath), href);
+        if (ref.external) {
+          return;
+        }
+
+        event.preventDefault();
+
+        var targetPath = normalizePath(ref.path || sourcePath || "");
+        var targetFragment = ref.fragment || "";
+        if (targetPath && targetFragment) {
+          var idMap = allIdMapByPath.get(targetPath);
+          if (idMap && idMap.has(targetFragment)) {
+            targetFragment = idMap.get(targetFragment);
+          }
+        }
+
+        if (!targetPath && targetFragment) {
+          targetPath = findChapterPathByFragment(targetFragment, allIdMapByPath);
+        }
+
+        if (!targetPath && !targetFragment) {
+          return;
+        }
+
+        if (targetPath && !renderedSectionByPath.has(targetPath) && allChaptersByPath.has(targetPath)) {
+          var chapter = allChaptersByPath.get(targetPath);
+          renderSelectedChapters(
+            [{ path: targetPath, title: chapter.title || "" }],
+            allChaptersByPath,
+            { skipTopScroll: true }
+          );
+          if (activeTocLink) {
+            activeTocLink.classList.remove("active");
+            activeTocLink = null;
+          }
+        }
+
+        if (!scrollToContentTarget(targetPath, targetFragment)) {
+          setStatus("Cannot locate link target: " + href);
+        }
+      }
+
+      function scrollToContentTarget(path, fragment) {
+        var targetSection = path ? renderedSectionByPath.get(path) : "";
+        var sectionEl = targetSection ? document.getElementById(targetSection) : null;
+        if (!sectionEl) {
+          return false;
+        }
+
+        var targetEl = sectionEl;
+        if (fragment) {
+          var fragmentEl = document.getElementById(fragment);
+          if (fragmentEl && sectionEl.contains(fragmentEl)) {
+            targetEl = fragmentEl;
+          }
+        }
+
+        if (typeof targetEl.scrollIntoView === "function") {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (mainPanel) {
+          mainPanel.scrollTop = targetEl.offsetTop || 0;
+        }
+        return true;
       }
 
       function collectChapterRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath) {
