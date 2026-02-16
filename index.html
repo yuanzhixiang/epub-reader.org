@@ -1418,17 +1418,68 @@
           return body.innerHTML;
         }
 
-        var tag = localName(first);
-        if (!/^h[1-6]$/.test(tag)) {
+        var firstHeading = body.querySelector("h1,h2,h3,h4,h5,h6");
+        if (!firstHeading) {
           return body.innerHTML;
         }
 
-        var normalizedFirst = normalizeHeadingCompare(first.textContent || "");
+        var normalizedFirst = normalizeHeadingCompare(firstHeading.textContent || "");
         if (normalizedFirst && normalizedFirst === normalizedTitle) {
-          first.remove();
+          if (!hasMeaningfulContentBeforeNode(body, firstHeading)) {
+            var parent = firstHeading.parentElement;
+            firstHeading.remove();
+            cleanupEmptyContainerUpwards(parent, body);
+          }
         }
 
         return body.innerHTML;
+      }
+
+      function hasMeaningfulContentBeforeNode(root, targetNode) {
+        var treeDoc = root && root.ownerDocument ? root.ownerDocument : document;
+        if (!root || !targetNode || !treeDoc || !treeDoc.createTreeWalker || !window.NodeFilter) {
+          return false;
+        }
+
+        var walker = treeDoc.createTreeWalker(
+          root,
+          window.NodeFilter.SHOW_ELEMENT | window.NodeFilter.SHOW_TEXT,
+          null
+        );
+
+        var node = walker.nextNode();
+        while (node) {
+          if (node === targetNode) {
+            return false;
+          }
+
+          if (node.nodeType === 3) {
+            if ((node.nodeValue || "").replace(/\u00a0/g, "").trim()) {
+              return true;
+            }
+          } else if (node.nodeType === 1) {
+            var tag = localName(node);
+            if (["img", "svg", "video", "audio", "table", "ul", "ol", "blockquote", "pre", "code", "hr"].indexOf(tag) >= 0) {
+              return true;
+            }
+          }
+
+          node = walker.nextNode();
+        }
+
+        return false;
+      }
+
+      function cleanupEmptyContainerUpwards(node, stopNode) {
+        var current = node;
+        while (current && current !== stopNode) {
+          if (!isEmptyNode(current)) {
+            break;
+          }
+          var parent = current.parentElement;
+          current.remove();
+          current = parent;
+        }
       }
 
       function normalizeHeadingCompare(text) {
