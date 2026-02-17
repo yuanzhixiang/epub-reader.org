@@ -1284,23 +1284,47 @@
         tocWrap.appendChild(tree);
 
         var chapterByPath = new Map();
+        var spinePaths = [];
+        var spineIndexByPath = new Map();
         for (var i = 0; i < chapters.length; i += 1) {
-          chapterByPath.set(chapters[i].path, chapters[i]);
+          var chapterPath = chapters[i].path;
+          chapterByPath.set(chapterPath, chapters[i]);
+          spinePaths.push(chapterPath);
+          spineIndexByPath.set(chapterPath, i);
         }
 
-        renderTocBranch(items, tree, tocData.baseDir || "", maps.sectionByPath, maps.idMapByPath, chapterByPath);
+        renderTocBranch(
+          items,
+          tree,
+          tocData.baseDir || "",
+          maps.sectionByPath,
+          maps.idMapByPath,
+          chapterByPath,
+          spinePaths,
+          spineIndexByPath,
+          ""
+        );
       }
 
-      function renderTocBranch(items, parentEl, tocBaseDir, sectionByPath, idMapByPath, chapterByPath) {
+      function renderTocBranch(items, parentEl, tocBaseDir, sectionByPath, idMapByPath, chapterByPath, spinePaths, spineIndexByPath, fallbackBoundaryPath) {
         for (var i = 0; i < items.length; i += 1) {
           var item = items[i];
+          var nextBoundaryPath = findNextBoundaryPath(items, i, tocBaseDir, sectionByPath, idMapByPath, fallbackBoundaryPath);
           var li = document.createElement("li");
           var row = document.createElement("div");
           row.className = "toc-row";
 
           var link = document.createElement("a");
           link.textContent = item.title || "Untitled";
-          var refs = collectChapterRefsFromItem(item, tocBaseDir, sectionByPath, idMapByPath);
+          var refs = collectChapterRefsFromItem(
+            item,
+            tocBaseDir,
+            sectionByPath,
+            idMapByPath,
+            spinePaths,
+            spineIndexByPath,
+            nextBoundaryPath
+          );
           if (refs.length > 0) {
             link.href = "javascript:void(0)";
             attachTocSelectHandler(link, item, refs, chapterByPath);
@@ -1317,7 +1341,17 @@
             var child = document.createElement("ul");
             child.className = "toc-tree";
             li.appendChild(child);
-            renderTocBranch(item.children, child, tocBaseDir, sectionByPath, idMapByPath, chapterByPath);
+            renderTocBranch(
+              item.children,
+              child,
+              tocBaseDir,
+              sectionByPath,
+              idMapByPath,
+              chapterByPath,
+              spinePaths,
+              spineIndexByPath,
+              nextBoundaryPath
+            );
           }
 
           parentEl.appendChild(li);
@@ -1335,7 +1369,13 @@
           link.classList.add("active");
 
           renderSelectedChapters(refs, chapterByPath);
-          setStatus("Showing: " + (item.title || "Untitled") + " (" + refs.length + " chapters)");
+          var chapterCount = 0;
+          for (var i = 0; i < refs.length; i += 1) {
+            if (!refs[i].continuation) {
+              chapterCount += 1;
+            }
+          }
+          setStatus("Showing: " + (item.title || "Untitled") + " (" + chapterCount + " chapters)");
         });
       }
 
@@ -1351,20 +1391,23 @@
             continue;
           }
           var displayTitle = ref.title || chapter.title || stripExt(ref.path.split("/").pop() || ref.path);
+          var isContinuation = !!ref.continuation;
 
           var article = document.createElement("article");
           article.className = "chapter";
           article.id = "selected-" + slugify(chapter.path) + "-" + i;
           article.setAttribute("data-chapter-path", chapter.path);
 
-          var h2 = document.createElement("h2");
-          h2.textContent = displayTitle;
-          article.appendChild(h2);
+          if (!isContinuation) {
+            var h2 = document.createElement("h2");
+            h2.textContent = displayTitle;
+            article.appendChild(h2);
+          }
 
           var content = document.createElement("div");
           content.className = "chapter-content";
           content.setAttribute("data-chapter-path", chapter.path);
-          content.innerHTML = removeDuplicateLeadingHeading(chapter.html, displayTitle);
+          content.innerHTML = removeDuplicateLeadingHeading(chapter.html, isContinuation ? "" : displayTitle);
           article.appendChild(content);
 
           contentBody.appendChild(article);
@@ -1483,7 +1526,40 @@
         return true;
       }
 
-      function collectChapterRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath) {
+      function findNextBoundaryPath(items, index, tocBaseDir, sectionByPath, idMapByPath, fallbackBoundaryPath) {
+        for (var i = index + 1; i < items.length; i += 1) {
+          var nextPath = findFirstChapterPathInItem(items[i], tocBaseDir, sectionByPath, idMapByPath);
+          if (nextPath) {
+            return nextPath;
+          }
+        }
+        return fallbackBoundaryPath || "";
+      }
+
+      function findFirstChapterPathInItem(item, tocBaseDir, sectionByPath, idMapByPath) {
+        var path = "";
+        walk(item);
+        return path;
+
+        function walk(node) {
+          if (!node || path) {
+            return;
+          }
+
+          var nodePath = resolveChapterPathFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath);
+          if (nodePath) {
+            path = nodePath;
+            return;
+          }
+
+          var children = node.children || [];
+          for (var i = 0; i < children.length; i += 1) {
+            walk(children[i]);
+          }
+        }
+      }
+
+      function collectAnchorRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath) {
         var refs = [];
         var seen = new Set();
 
@@ -1495,22 +1571,13 @@
             return;
           }
 
-          var ref = resolveTargetRef(tocBaseDir, node.href || "");
-          var path = "";
-
-          if (!ref.external) {
-            if (ref.path && sectionByPath.has(ref.path)) {
-              path = ref.path;
-            } else if (!ref.path && ref.fragment) {
-              path = findChapterPathByFragment(ref.fragment, idMapByPath);
-            }
-          }
-
+          var path = resolveChapterPathFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath);
           if (path && !seen.has(path)) {
             seen.add(path);
             refs.push({
               path: path,
-              title: cleanText(node.title || "")
+              title: cleanText(node.title || ""),
+              continuation: false
             });
           }
 
@@ -1519,6 +1586,84 @@
             walk(children[i]);
           }
         }
+      }
+
+      function resolveChapterPathFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath) {
+        if (!node) {
+          return "";
+        }
+        var ref = resolveTargetRef(tocBaseDir, node.href || "");
+        if (ref.external) {
+          return "";
+        }
+        if (ref.path && sectionByPath.has(ref.path)) {
+          return ref.path;
+        }
+        if (!ref.path && ref.fragment) {
+          return findChapterPathByFragment(ref.fragment, idMapByPath);
+        }
+        return "";
+      }
+
+      function collectChapterRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath, spinePaths, spineIndexByPath, boundaryPath) {
+        var anchorRefs = collectAnchorRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath);
+        if (!anchorRefs.length) {
+          return [];
+        }
+        if (!spinePaths || !spinePaths.length || !spineIndexByPath) {
+          return anchorRefs;
+        }
+
+        var stopIdx = spinePaths.length;
+        if (boundaryPath && spineIndexByPath.has(boundaryPath)) {
+          stopIdx = spineIndexByPath.get(boundaryPath);
+        }
+
+        var refs = [];
+        var seen = new Set();
+
+        for (var i = 0; i < anchorRefs.length; i += 1) {
+          var anchor = anchorRefs[i];
+          if (!spineIndexByPath.has(anchor.path)) {
+            continue;
+          }
+
+          var startIdx = spineIndexByPath.get(anchor.path);
+          if (startIdx >= stopIdx) {
+            continue;
+          }
+
+          var endIdx = stopIdx;
+          for (var j = i + 1; j < anchorRefs.length; j += 1) {
+            var nextAnchorPath = anchorRefs[j].path;
+            if (spineIndexByPath.has(nextAnchorPath)) {
+              endIdx = Math.min(endIdx, spineIndexByPath.get(nextAnchorPath));
+              break;
+            }
+          }
+
+          if (endIdx <= startIdx) {
+            endIdx = Math.min(stopIdx, startIdx + 1);
+          }
+
+          for (var k = startIdx; k < endIdx && k < spinePaths.length; k += 1) {
+            var path = spinePaths[k];
+            if (seen.has(path)) {
+              continue;
+            }
+            seen.add(path);
+            refs.push({
+              path: path,
+              title: k === startIdx ? anchor.title : "",
+              continuation: k !== startIdx
+            });
+          }
+        }
+
+        if (!refs.length) {
+          return anchorRefs;
+        }
+        return refs;
       }
 
       function findChapterPathByFragment(fragment, idMapByPath) {
