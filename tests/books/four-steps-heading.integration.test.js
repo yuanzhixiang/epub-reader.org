@@ -9,7 +9,6 @@ import {
   parseToc,
   parseXml
 } from "../../src/epub/parser.js";
-import { removeDuplicateLeadingHeading } from "../../src/epub/chapter-title.js";
 
 var BOOK_ROOT = path.resolve(process.cwd(), "book/the four steps to the epiphany");
 
@@ -110,7 +109,7 @@ function createFsResolver(rootDir, filePaths) {
   };
 }
 
-describe("four steps heading dedupe", function () {
+describe("four steps chapter heading fidelity", function () {
   var chapters = [];
 
   beforeAll(async function () {
@@ -130,7 +129,7 @@ describe("four steps heading dedupe", function () {
     mediaRegistry.revokeAll();
   }, 120000);
 
-  it("dedupes chapter marker + subtitle when toc title already contains both", function () {
+  it("keeps chapter 1 heading structure from source body", function () {
     var chapter1 = null;
     for (var i = 0; i < chapters.length; i += 1) {
       if (chapters[i].path === "OEBPS/7-chap1.xhtml") {
@@ -142,17 +141,21 @@ describe("four steps heading dedupe", function () {
     expect(chapter1).not.toBeNull();
     expect(chapter1.title).toBe("Chapter 1: The Path To Disaster: The Product Development Model");
 
-    var dedupedHtml = removeDuplicateLeadingHeading(chapter1.html, chapter1.title);
     var parser = new DOMParser();
-    var doc = parser.parseFromString("<!doctype html><html><body>" + dedupedHtml + "</body></html>", "text/html");
+    var doc = parser.parseFromString("<!doctype html><html><body>" + chapter1.html + "</body></html>", "text/html");
     var body = doc.body;
+    var first = body.firstElementChild;
+    var second = first ? first.nextElementSibling : null;
 
-    expect(body.querySelector("h1.chapter")).toBeNull();
-    expect(body.querySelector("h1.chapter2")).toBeNull();
-    expect(body.firstElementChild && body.firstElementChild.classList.contains("blockquote")).toBe(true);
+    expect(first && first.tagName.toLowerCase()).toBe("h1");
+    expect(first && first.classList.contains("chapter")).toBe(true);
+    expect(first && first.textContent && first.textContent.replace(/\s+/g, " ").trim()).toBe("CHAPTER 1");
+    expect(second && second.tagName.toLowerCase()).toBe("h1");
+    expect(second && second.classList.contains("chapter2")).toBe(true);
+    expect(second && second.textContent && second.textContent.replace(/\s+/g, " ").trim()).toBe("The Path to Disaster: The Product Development Model");
   });
 
-  it("for chapter 5, keeps the leading image block and removes duplicated chapter headings", function () {
+  it("keeps chapter 5 leading image block and following source headings", function () {
     var chapter5 = null;
     for (var i = 0; i < chapters.length; i += 1) {
       if (chapters[i].path === "OEBPS/16-chap5.xhtml") {
@@ -164,14 +167,20 @@ describe("four steps heading dedupe", function () {
     expect(chapter5).not.toBeNull();
     expect(chapter5.title).toBe("Chapter 5: Customer Creation");
 
-    var dedupedHtml = removeDuplicateLeadingHeading(chapter5.html, chapter5.title);
     var parser = new DOMParser();
-    var doc = parser.parseFromString("<!doctype html><html><body>" + dedupedHtml + "</body></html>", "text/html");
+    var doc = parser.parseFromString("<!doctype html><html><body>" + chapter5.html + "</body></html>", "text/html");
     var body = doc.body;
+    var first = body.firstElementChild;
+    var second = first ? first.nextElementSibling : null;
+    var third = second ? second.nextElementSibling : null;
 
-    expect(body.querySelector("p#ch16__chap5__0 img")).not.toBeNull();
-    expect(body.querySelector("h1.chapter")).toBeNull();
-    expect(body.querySelector("h1.chapter2")).toBeNull();
-    expect(body.firstElementChild && body.firstElementChild.id).toBe("ch16__chap5__0");
+    expect(first && first.tagName.toLowerCase()).toBe("p");
+    expect(first && first.querySelector("img")).not.toBeNull();
+    expect(second && second.tagName.toLowerCase()).toBe("h1");
+    expect(second && second.classList.contains("chapter")).toBe(true);
+    expect(second && second.textContent && second.textContent.replace(/\s+/g, " ").trim()).toBe("CHAPTER 5");
+    expect(third && third.tagName.toLowerCase()).toBe("h1");
+    expect(third && third.classList.contains("chapter2")).toBe(true);
+    expect(third && third.textContent && third.textContent.replace(/\s+/g, " ").trim()).toBe("Customer Creation");
   });
 });

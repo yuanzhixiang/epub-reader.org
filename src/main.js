@@ -8,10 +8,8 @@ import {
   normalizePath,
   parseEpubFromArrayBuffer,
   resolveTargetRef,
-  slugify,
-  stripExt
+  slugify
 } from "./epub/parser.js";
-import { removeDuplicateLeadingHeading } from "./epub/chapter-title.js";
 
 (function () {
   var fileInput = document.getElementById("fileInput");
@@ -260,21 +258,16 @@ import { removeDuplicateLeadingHeading } from "./epub/chapter-title.js";
     for (var i = 0; i < chapters.length; i += 1) {
       var chapter = chapters[i];
       var sectionId = "section-" + chapter.index;
-      var displayTitle = chapter.title || stripExt(chapter.path.split("/").pop() || ("chapter-" + chapter.index));
 
       var article = document.createElement("article");
       article.className = "chapter";
       article.id = sectionId;
       article.setAttribute("data-chapter-path", chapter.path);
 
-      var h2 = document.createElement("h2");
-      h2.textContent = displayTitle;
-      article.appendChild(h2);
-
       var content = document.createElement("div");
       content.className = "chapter-content";
       content.setAttribute("data-chapter-path", chapter.path);
-      content.innerHTML = removeDuplicateLeadingHeading(chapter.html, displayTitle);
+      content.innerHTML = chapter.html || "";
       article.appendChild(content);
 
       contentBody.appendChild(article);
@@ -409,24 +402,16 @@ import { removeDuplicateLeadingHeading } from "./epub/chapter-title.js";
       if (!chapter) {
         continue;
       }
-      var displayTitle = ref.title || chapter.title || stripExt(ref.path.split("/").pop() || ref.path);
-      var isContinuation = !!ref.continuation;
 
       var article = document.createElement("article");
       article.className = "chapter";
       article.id = "selected-" + slugify(chapter.path) + "-" + i;
       article.setAttribute("data-chapter-path", chapter.path);
 
-      if (!isContinuation) {
-        var h2 = document.createElement("h2");
-        h2.textContent = displayTitle;
-        article.appendChild(h2);
-      }
-
       var content = document.createElement("div");
       content.className = "chapter-content";
       content.setAttribute("data-chapter-path", chapter.path);
-      content.innerHTML = removeDuplicateLeadingHeading(chapter.html, isContinuation ? "" : displayTitle);
+      content.innerHTML = chapter.html || "";
       article.appendChild(content);
 
       contentBody.appendChild(article);
