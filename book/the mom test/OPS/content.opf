@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="PrimaryID">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:title>The Mom Test: how to talk to customers and learn if your business is a good idea when everybody is lying to you</dc:title>
+        <dc:identifier id="PrimaryID">urn:uuid:5BEB296D-E55F-4041-9E8C-BF56109D45D2</dc:identifier>
+        <dc:language>en</dc:language>
+        <dc:creator opf:role="aut">Rob Fitzpatrick</dc:creator>
+    </metadata>
+    <manifest>
+        <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"></item>
+        <item id="body" href="body.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="contents" href="contents.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body1" href="body1.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body2" href="body2.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body3" href="body3.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body4" href="body4.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body5" href="body5.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body6" href="body6.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body7" href="body7.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body8" href="body8.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body9" href="body9.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body10" href="body10.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body11" href="body11.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body12" href="body12.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body13" href="body13.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body14" href="body14.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body15" href="body15.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body16" href="body16.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body17" href="body17.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body18" href="body18.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body19" href="body19.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body20" href="body20.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body21" href="body21.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body22" href="body22.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body23" href="body23.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body24" href="body24.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body25" href="body25.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body26" href="body26.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body27" href="body27.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body28" href="body28.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body29" href="body29.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body30" href="body30.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body31" href="body31.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="body32" href="body32.xhtml" media-type="application/xhtml+xml"></item>
+        <item id="stylesheet-css" href="css/stylesheet.css" media-type="text/css"></item>
+        <item id="stylesheet1-css" href="css/stylesheet1.css" media-type="text/css"></item>
+        <item id="stylesheet2-css" href="css/stylesheet2.css" media-type="text/css"></item>
+        <item id="stylesheet3-css" href="css/stylesheet3.css" media-type="text/css"></item>
+        <item id="stylesheet4-css" href="css/stylesheet4.css" media-type="text/css"></item>
+        <item id="stylesheet5-css" href="css/stylesheet5.css" media-type="text/css"></item>
+        <item id="stylesheet6-css" href="css/stylesheet6.css" media-type="text/css"></item>
+        <item id="stylesheet7-css" href="css/stylesheet7.css" media-type="text/css"></item>
+        <item id="stylesheet8-css" href="css/stylesheet8.css" media-type="text/css"></item>
+        <item id="stylesheet9-css" href="css/stylesheet9.css" media-type="text/css"></item>
+        <item id="stylesheet10-css" href="css/stylesheet10.css" media-type="text/css"></item>
+        <item id="stylesheet11-css" href="css/stylesheet11.css" media-type="text/css"></item>
+        <item id="stylesheet12-css" href="css/stylesheet12.css" media-type="text/css"></item>
+        <item id="stylesheet13-css" href="css/stylesheet13.css" media-type="text/css"></item>
+        <item id="stylesheet14-css" href="css/stylesheet14.css" media-type="text/css"></item>
+        <item id="stylesheet15-css" href="css/stylesheet15.css" media-type="text/css"></item>
+        <item id="stylesheet16-css" href="css/stylesheet16.css" media-type="text/css"></item>
+        <item id="stylesheet17-css" href="css/stylesheet17.css" media-type="text/css"></item>
+        <item id="stylesheet18-css" href="css/stylesheet18.css" media-type="text/css"></item>
+        <item id="stylesheet19-css" href="css/stylesheet19.css" media-type="text/css"></item>
+    </manifest>
+    <spine toc="ncx">
+        <itemref idref="body" linear="yes"></itemref>
+        <itemref idref="contents" linear="yes"></itemref>
+        <itemref idref="body1" linear="yes"></itemref>
+        <itemref idref="body2" linear="yes"></itemref>
+        <itemref idref="body3" linear="yes"></itemref>
+        <itemref idref="body4" linear="yes"></itemref>
+        <itemref idref="body5" linear="yes"></itemref>
+        <itemref idref="body6" linear="yes"></itemref>
+        <itemref idref="body7" linear="yes"></itemref>
+        <itemref idref="body8" linear="yes"></itemref>
+        <itemref idref="body9" linear="yes"></itemref>
+        <itemref idref="body10" linear="yes"></itemref>
+        <itemref idref="body11" linear="yes"></itemref>
+        <itemref idref="body12" linear="yes"></itemref>
+        <itemref idref="body13" linear="yes"></itemref>
+        <itemref idref="body14" linear="yes"></itemref>
+        <itemref idref="body15" linear="yes"></itemref>
+        <itemref idref="body16" linear="yes"></itemref>
+        <itemref idref="body17" linear="yes"></itemref>
+        <itemref idref="body18" linear="yes"></itemref>
+        <itemref idref="body19" linear="yes"></itemref>
+        <itemref idref="body20" linear="yes"></itemref>
+        <itemref idref="body21" linear="yes"></itemref>
+        <itemref idref="body22" linear="yes"></itemref>
+        <itemref idref="body23" linear="yes"></itemref>
+        <itemref idref="body24" linear="yes"></itemref>
+        <itemref idref="body25" linear="yes"></itemref>
+        <itemref idref="body26" linear="yes"></itemref>
+        <itemref idref="body27" linear="yes"></itemref>
+        <itemref idref="body28" linear="yes"></itemref>
+        <itemref idref="body29" linear="yes"></itemref>
+        <itemref idref="body30" linear="yes"></itemref>
+        <itemref idref="body31" linear="yes"></itemref>
+        <itemref idref="body32" linear="yes"></itemref>
+    </spine>
+    <guide>
+        <reference type="toc" title="Contents" href="contents.xhtml"></reference>
+    </guide>
+</package>
