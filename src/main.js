@@ -112,6 +112,7 @@ import {
 
       var tocData = parsed.tocData;
       var chapters = parsed.chapters;
+      var audit = parsed.audit || null;
       if (chapters.length === 0) {
         throw new Error("No displayable chapters found (empty spine or missing chapter files).");
       }
@@ -121,13 +122,30 @@ import {
       var sectionMaps = renderChapters(chapters);
       renderToc(tocData, chapters, sectionMaps);
 
-      setStatus(
+      var doneMessage =
         "Done: " +
         chapters.length +
         " chapters, TOC source: " +
         humanizeTocSource(tocData.source) +
-        ". Click a TOC item to show that node and its children."
-      );
+        ". Click a TOC item to show that node and its children.";
+      if (audit && audit.summary && (
+        audit.summary.missingSpineItems > 0 ||
+        audit.summary.missingTocTargets > 0 ||
+        audit.summary.missingReferencedResources > 0 ||
+        audit.summary.blockedByPolicy > 0
+      )) {
+        doneMessage +=
+          " Warning: missing spine items=" +
+          audit.summary.missingSpineItems +
+          ", missing TOC targets=" +
+          audit.summary.missingTocTargets +
+          ", missing referenced resources=" +
+          audit.summary.missingReferencedResources +
+          ", blocked by policy=" +
+          audit.summary.blockedByPolicy +
+          ".";
+      }
+      setStatus(doneMessage);
       enterViewerMode();
     } catch (error) {
       mediaAssetRegistry.revokeAll();
