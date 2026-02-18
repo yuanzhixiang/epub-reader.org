@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:6ee4dde4-db1f-4d3c-9ce5-db60492f8d78"/>
+    <meta name="dtb:depth" content="3"/>
+    <meta name="dtb:generator" content="calibre (7.26.0)"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>The Lean Startup</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="num_1" playOrder="0" class="chapter">
+      <navLabel>
+        <text>Title Page</text>
+      </navLabel>
+      <content src="text/part0001.html#UGI0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_2" playOrder="1" class="chapter">
+      <navLabel>
+        <text>Copyright</text>
+      </navLabel>
+      <content src="text/part0002.html#1T140-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_3" playOrder="2" class="chapter">
+      <navLabel>
+        <text>Contents</text>
+      </navLabel>
+      <content src="text/part0003.html#2RHM0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_4" playOrder="3" class="chapter">
+      <navLabel>
+        <text>Foreword</text>
+      </navLabel>
+      <content src="text/part0004.html#3Q280-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_5" playOrder="4" class="chapter">
+      <navLabel>
+        <text>Introduction</text>
+      </navLabel>
+      <content src="text/part0005_split_000.html#4OIQ0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_6" playOrder="5" class="chapter">
+      <navLabel>
+        <text>Part One: Vision</text>
+      </navLabel>
+      <content src="text/part0006.html#5N3C0-16f7fd252de2444f946399bc54151cc5"/>
+      <navPoint id="num_7" playOrder="6" class="chapter">
+        <navLabel>
+          <text>1. Start</text>
+        </navLabel>
+        <content src="text/part0007_split_000.html#6LJU0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_8" playOrder="7" class="chapter">
+        <navLabel>
+          <text>2. Define</text>
+        </navLabel>
+        <content src="text/part0008_split_000.html#7K4G0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_9" playOrder="8" class="chapter">
+        <navLabel>
+          <text>3. Learn</text>
+        </navLabel>
+        <content src="text/part0009_split_000.html#8IL20-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_10" playOrder="9" class="chapter">
+        <navLabel>
+          <text>4. Experiment</text>
+        </navLabel>
+        <content src="text/part0010_split_000.html#9H5K0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_11" playOrder="10" class="chapter">
+      <navLabel>
+        <text>Part Two: Steer</text>
+      </navLabel>
+      <content src="text/part0011_split_000.html#AFM60-16f7fd252de2444f946399bc54151cc5"/>
+      <navPoint id="num_12" playOrder="11" class="chapter">
+        <navLabel>
+          <text>5. Leap</text>
+        </navLabel>
+        <content src="text/part0012_split_000.html#BE6O0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_13" playOrder="12" class="chapter">
+        <navLabel>
+          <text>6. Test</text>
+        </navLabel>
+        <content src="text/part0013_split_000.html#CCNA0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_14" playOrder="13" class="chapter">
+        <navLabel>
+          <text>7. Measure</text>
+        </navLabel>
+        <content src="text/part0014_split_000.html#DB7S0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_15" playOrder="14" class="chapter">
+        <navLabel>
+          <text>8. Pivot (or Persevere)</text>
+        </navLabel>
+        <content src="text/part0015_split_000.html#E9OE0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_16" playOrder="15" class="chapter">
+      <navLabel>
+        <text>Part Three: Accelerate</text>
+      </navLabel>
+      <content src="text/part0016_split_000.html#F8900-16f7fd252de2444f946399bc54151cc5"/>
+      <navPoint id="num_17" playOrder="16" class="chapter">
+        <navLabel>
+          <text>9. Batch</text>
+        </navLabel>
+        <content src="text/part0017_split_000.html#G6PI0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_18" playOrder="17" class="chapter">
+        <navLabel>
+          <text>10. Grow</text>
+        </navLabel>
+        <content src="text/part0018_split_000.html#H5A40-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_19" playOrder="18" class="chapter">
+        <navLabel>
+          <text>11. Adapt</text>
+        </navLabel>
+        <content src="text/part0019_split_000.html#I3QM0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_20" playOrder="19" class="chapter">
+        <navLabel>
+          <text>12. Innovate</text>
+        </navLabel>
+        <content src="text/part0020_split_000.html#J2B80-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_21" playOrder="20" class="chapter">
+        <navLabel>
+          <text>13. Epilogue: Waste Not</text>
+        </navLabel>
+        <content src="text/part0021_split_000.html#K0RQ0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+      <navPoint id="num_22" playOrder="21" class="chapter">
+        <navLabel>
+          <text>14. Join the Movement</text>
+        </navLabel>
+        <content src="text/part0022_split_000.html#KVCC0-16f7fd252de2444f946399bc54151cc5"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_23" playOrder="22" class="chapter">
+      <navLabel>
+        <text>Dedication</text>
+      </navLabel>
+      <content src="text/part0023.html#LTSU0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_24" playOrder="23" class="chapter">
+      <navLabel>
+        <text>Acknowledgments</text>
+      </navLabel>
+      <content src="text/part0024.html#MSDG0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_25" playOrder="24" class="chapter">
+      <navLabel>
+        <text>Endnotes</text>
+      </navLabel>
+      <content src="text/part0025.html#NQU20-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_26" playOrder="25" class="chapter">
+      <navLabel>
+        <text>Disclosures</text>
+      </navLabel>
+      <content src="text/part0026.html#OPEK0-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+    <navPoint id="num_27" playOrder="26" class="chapter">
+      <navLabel>
+        <text>About the Author</text>
+      </navLabel>
+      <content src="text/part0027.html#PNV60-16f7fd252de2444f946399bc54151cc5"/>
+    </navPoint>
+  </navMap>
+</ncx>
