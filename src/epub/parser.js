@@ -699,14 +699,9 @@ async function rewriteEmbeddedMediaUrls(root, resolver, chapterDir, mediaTypeByP
     attrTasks.push(rewriteMediaAttr(posterNodes[j], "poster", resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry));
   }
 
-  var svgImageNodes = root.querySelectorAll("image[href],image[xlink\\:href]");
+  var svgImageNodes = root.querySelectorAll("image");
   for (var k = 0; k < svgImageNodes.length; k += 1) {
-    if (svgImageNodes[k].hasAttribute("href")) {
-      attrTasks.push(rewriteMediaAttr(svgImageNodes[k], "href", resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry));
-    }
-    if (svgImageNodes[k].hasAttribute("xlink:href")) {
-      attrTasks.push(rewriteMediaAttr(svgImageNodes[k], "xlink:href", resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry));
-    }
+    attrTasks.push(rewriteSvgImageHref(svgImageNodes[k], resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry));
   }
 
   await Promise.all(attrTasks);
@@ -734,6 +729,35 @@ async function rewriteMediaAttr(node, attrName, resolver, chapterDir, mediaTypeB
   var rewritten = await resolveEmbeddedMediaUrl(raw, resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry);
   if (rewritten) {
     node.setAttribute(attrName, rewritten);
+  }
+}
+
+async function rewriteSvgImageHref(node, resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry) {
+  if (!node) {
+    return;
+  }
+
+  var rawHref = (node.getAttribute("href") || node.getAttribute("xlink:href") || "").trim();
+  if (!rawHref && typeof node.getAttributeNS === "function") {
+    rawHref = (node.getAttributeNS("http://www.w3.org/1999/xlink", "href") || "").trim();
+  }
+  if (!rawHref) {
+    return;
+  }
+
+  var rewritten = await resolveEmbeddedMediaUrl(rawHref, resolver, chapterDir, mediaTypeByPath, mediaAssetRegistry);
+  if (!rewritten) {
+    return;
+  }
+
+  node.setAttribute("href", rewritten);
+  node.setAttribute("xlink:href", rewritten);
+  if (typeof node.setAttributeNS === "function") {
+    try {
+      node.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", rewritten);
+    } catch (_error) {
+      // Some runtimes may not support writing namespaced attrs for HTML-parsed SVG nodes.
+    }
   }
 }
 

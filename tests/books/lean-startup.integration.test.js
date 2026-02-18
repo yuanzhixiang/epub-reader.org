@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
   createMediaAssetRegistry,
   loadSpineChapters,
@@ -247,8 +247,19 @@ describe("lean startup post-unzip parsing", function () {
   var opfInfo = null;
   var tocData = null;
   var chapters = [];
+  var savedCreateObjectURL = null;
+  var savedRevokeObjectURL = null;
+  var objectUrlSeq = 0;
 
   beforeAll(async function () {
+    savedCreateObjectURL = URL.createObjectURL;
+    savedRevokeObjectURL = URL.revokeObjectURL;
+    URL.createObjectURL = function () {
+      objectUrlSeq += 1;
+      return "blob:test-cover-" + objectUrlSeq;
+    };
+    URL.revokeObjectURL = function () {};
+
     fixtureFiles = await listFilesRecursively(BOOK_ROOT, "");
     fixtureFileSet = new Set(fixtureFiles);
     resolver = createFsResolver(BOOK_ROOT, fixtureFiles);
@@ -267,6 +278,19 @@ describe("lean startup post-unzip parsing", function () {
 
     packageModel = await readPackageModel(BOOK_ROOT);
   }, 120000);
+
+  afterAll(function () {
+    if (savedCreateObjectURL) {
+      URL.createObjectURL = savedCreateObjectURL;
+    } else {
+      delete URL.createObjectURL;
+    }
+    if (savedRevokeObjectURL) {
+      URL.revokeObjectURL = savedRevokeObjectURL;
+    } else {
+      delete URL.revokeObjectURL;
+    }
+  });
 
   it("reads OPF and resolves expected metadata", function () {
     expect(fixtureFiles.length).toBeGreaterThan(100);
@@ -301,6 +325,21 @@ describe("lean startup post-unzip parsing", function () {
     });
 
     expect(actualPaths).toEqual(expectedPaths);
+  });
+
+  it("rewrites titlepage svg cover href to blob URL", function () {
+    var titlepageChapter = null;
+    for (var i = 0; i < chapters.length; i += 1) {
+      if (chapters[i].path === "titlepage.xhtml") {
+        titlepageChapter = chapters[i];
+        break;
+      }
+    }
+
+    expect(titlepageChapter).not.toBeNull();
+    var html = String(titlepageChapter ? titlepageChapter.html : "");
+    var hasBlobHref = /<image\b[^>]*(?:xlink:href|href)=["']blob:/i.test(html);
+    expect(hasBlobHref).toBe(true);
   });
 
   it("for each parsed chapter file, a sampled source snippet is present in parsed output", async function () {
