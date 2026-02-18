@@ -1,0 +1,313 @@
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uid" version="2.0">
+	    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+			<dc:creator id="creator_aut" opf:file-as="Blank, Steve" opf:role="aut">Steve Blank</dc:creator>
+		<dc:date id="date_1" opf:event="creation">2016-08-18T15:19-06:00</dc:date>
+		<dc:language id="en_language">en-us</dc:language>
+		<dc:publisher id="en_publisher" xml:lang="en-us">BookBaby</dc:publisher>
+		<dc:title id="en_title" xml:lang="en-us">The Four Steps to the Epiphany</dc:title>
+		<dc:type id="en_type_1">Text</dc:type>
+		<dc:identifier id="uid" opf:scheme="ISBN">978-0-9892005-2-3</dc:identifier>
+		    <meta content="coverimage" name="cover"/>
+		    <meta content="eBook Architects - a service of Firebrand Technologies" name="eBookCreators"/>
+		<description xmlns="http://purl.org/dc/elements/1.1/">&lt;p&gt;The bestselling classic that launched 10,000 startups and new corporate ventures - The Four Steps to the Epiphany is one of the most influential and practical business books of all time. &lt;/p&gt; &lt;p&gt;The Four Steps to the Epiphany launched the Lean Startup approach to new ventures. It was the first book to offer that startups are not smaller versions of large companies and that new ventures are different than existing ones. Startups search for business models while existing companies execute them. &lt;/p&gt; &lt;p&gt;The book offers the practical and proven four-step Customer Development process for search and offers insight into what makes some startups successful and leaves others selling off their furniture. Rather than blindly execute a plan, The Four Steps helps uncover flaws in product and business plans and correct them before they become costly. Rapid iteration, customer feedback, testing your assumptions are all explained in this book. &lt;/p&gt; &lt;p&gt;Packed with concrete examples of what to...</description>
+</metadata>
+		<manifest>
+		    
+		    <item href="toc.ncx" id="toc" media-type="application/x-dtbncx+xml"/>
+			<item href="1-cover.xhtml" id="item1" media-type="application/xhtml+xml"/>
+	<item href="2-title_page.xhtml" id="item2" media-type="application/xhtml+xml"/>
+	<item href="3-copyright.xhtml" id="item3" media-type="application/xhtml+xml"/>
+	<item href="4-TOC.xhtml" id="item4" media-type="application/xhtml+xml"/>
+	<item href="5-preface.xhtml" id="item5" media-type="application/xhtml+xml"/>
+	<item href="6-intro.xhtml" id="item6" media-type="application/xhtml+xml"/>
+	<item href="7-chap1.xhtml" id="item7" media-type="application/xhtml+xml"/>
+	<item href="8-chap2.xhtml" id="item8" media-type="application/xhtml+xml"/>
+	<item href="9-page39.xhtml" id="item9" media-type="application/xhtml+xml"/>
+	<item href="10-chap3.xhtml" id="item10" media-type="application/xhtml+xml"/>
+	<item href="11-page103.xhtml" id="item11" media-type="application/xhtml+xml"/>
+	<item href="12-page104.xhtml" id="item12" media-type="application/xhtml+xml"/>
+	<item href="13-chap4.xhtml" id="item13" media-type="application/xhtml+xml"/>
+	<item href="14-page155.xhtml" id="item14" media-type="application/xhtml+xml"/>
+	<item href="15-page156.xhtml" id="item15" media-type="application/xhtml+xml"/>
+	<item href="16-chap5.xhtml" id="item16" media-type="application/xhtml+xml"/>
+	<item href="17-page205.xhtml" id="item17" media-type="application/xhtml+xml"/>
+	<item href="18-page206.xhtml" id="item18" media-type="application/xhtml+xml"/>
+	<item href="19-chap6.xhtml" id="item19" media-type="application/xhtml+xml"/>
+	<item href="20-page263.xhtml" id="item20" media-type="application/xhtml+xml"/>
+	<item href="21-biblio.xhtml" id="item21" media-type="application/xhtml+xml"/>
+	<item href="22-appxa.xhtml" id="item22" media-type="application/xhtml+xml"/>
+	<item href="23-appxb.xhtml" id="item23" media-type="application/xhtml+xml"/>
+	<item href="24-page289.xhtml" id="item24" media-type="application/xhtml+xml"/>
+	<item href="25-page290.xhtml" id="item25" media-type="application/xhtml+xml"/>
+	<item href="26-page291.xhtml" id="item26" media-type="application/xhtml+xml"/>
+	<item href="27-page292.xhtml" id="item27" media-type="application/xhtml+xml"/>
+	<item href="28-page293.xhtml" id="item28" media-type="application/xhtml+xml"/>
+	<item href="29-page295.xhtml" id="item29" media-type="application/xhtml+xml"/>
+	<item href="30-page298.xhtml" id="item30" media-type="application/xhtml+xml"/>
+	<item href="31-page300.xhtml" id="item31" media-type="application/xhtml+xml"/>
+	<item href="32-page302.xhtml" id="item32" media-type="application/xhtml+xml"/>
+	<item href="33-page305.xhtml" id="item33" media-type="application/xhtml+xml"/>
+	<item href="34-page307.xhtml" id="item34" media-type="application/xhtml+xml"/>
+	<item href="35-page309.xhtml" id="item35" media-type="application/xhtml+xml"/>
+	<item href="36-page310.xhtml" id="item36" media-type="application/xhtml+xml"/>
+	<item href="37-page312.xhtml" id="item37" media-type="application/xhtml+xml"/>
+	<item href="38-page314.xhtml" id="item38" media-type="application/xhtml+xml"/>
+	<item href="39-page316.xhtml" id="item39" media-type="application/xhtml+xml"/>
+	<item href="40-page318.xhtml" id="item40" media-type="application/xhtml+xml"/>
+	<item href="41-page321.xhtml" id="item41" media-type="application/xhtml+xml"/>
+	<item href="42-page322.xhtml" id="item42" media-type="application/xhtml+xml"/>
+	<item href="43-page324.xhtml" id="item43" media-type="application/xhtml+xml"/>
+	<item href="44-page326.xhtml" id="item44" media-type="application/xhtml+xml"/>
+	<item href="45-page328.xhtml" id="item45" media-type="application/xhtml+xml"/>
+	<item href="46-page330.xhtml" id="item46" media-type="application/xhtml+xml"/>
+	<item href="47-page332.xhtml" id="item47" media-type="application/xhtml+xml"/>
+	<item href="48-page334.xhtml" id="item48" media-type="application/xhtml+xml"/>
+	<item href="49-page336.xhtml" id="item49" media-type="application/xhtml+xml"/>
+	<item href="50-page338.xhtml" id="item50" media-type="application/xhtml+xml"/>
+	<item href="51-page339.xhtml" id="item51" media-type="application/xhtml+xml"/>
+	<item href="52-page342.xhtml" id="item52" media-type="application/xhtml+xml"/>
+	<item href="53-page344.xhtml" id="item53" media-type="application/xhtml+xml"/>
+	<item href="54-page347.xhtml" id="item54" media-type="application/xhtml+xml"/>
+	<item href="55-page349.xhtml" id="item55" media-type="application/xhtml+xml"/>
+	<item href="56-page350.xhtml" id="item56" media-type="application/xhtml+xml"/>
+	<item href="57-page354.xhtml" id="item57" media-type="application/xhtml+xml"/>
+	<item href="58-page356.xhtml" id="item58" media-type="application/xhtml+xml"/>
+	<item href="59-page358.xhtml" id="item59" media-type="application/xhtml+xml"/>
+	<item href="60-page359.xhtml" id="item60" media-type="application/xhtml+xml"/>
+	<item href="61-page361.xhtml" id="item61" media-type="application/xhtml+xml"/>
+	<item href="62-page363.xhtml" id="item62" media-type="application/xhtml+xml"/>
+	<item href="63-page365.xhtml" id="item63" media-type="application/xhtml+xml"/>
+	<item href="64-ack.xhtml" id="item64" media-type="application/xhtml+xml"/>
+	<item href="65-author.xhtml" id="item65" media-type="application/xhtml+xml"/>
+	<item href="cover.jpg" id="coverimage" media-type="image/jpeg"/>
+	<item href="images/101_img01.jpg" id="image1" media-type="image/jpeg"/>
+	<item href="images/121_img01.jpg" id="image2" media-type="image/jpeg"/>
+	<item href="images/134_img01.jpg" id="image3" media-type="image/jpeg"/>
+	<item href="images/149_img01.jpg" id="image4" media-type="image/jpeg"/>
+	<item href="images/153_img01.jpg" id="image5" media-type="image/jpeg"/>
+	<item href="images/238_img01.jpg" id="image6" media-type="image/jpeg"/>
+	<item href="images/311_img01.jpg" id="image7" media-type="image/jpeg"/>
+	<item href="images/321_img01.jpg" id="image8" media-type="image/jpeg"/>
+	<item href="images/335_img01.jpg" id="image9" media-type="image/jpeg"/>
+	<item href="images/367_img01.jpg" id="image10" media-type="image/jpeg"/>
+	<item href="images/367_img02.jpg" id="image11" media-type="image/jpeg"/>
+	<item href="images/368_img01.jpg" id="image12" media-type="image/jpeg"/>
+	<item href="images/369_img01.jpg" id="image13" media-type="image/jpeg"/>
+	<item href="images/370_img01.jpg" id="image14" media-type="image/jpeg"/>
+	<item href="images/380_img01.jpg" id="image15" media-type="image/jpeg"/>
+	<item href="images/381_img01.jpg" id="image16" media-type="image/jpeg"/>
+	<item href="images/382_img01.jpg" id="image17" media-type="image/jpeg"/>
+	<item href="images/387_img01.jpg" id="image18" media-type="image/jpeg"/>
+	<item href="images/395_img01.jpg" id="image19" media-type="image/jpeg"/>
+	<item href="images/424_img01.jpg" id="image20" media-type="image/jpeg"/>
+	<item href="images/426_img01.jpg" id="image21" media-type="image/jpeg"/>
+	<item href="images/428_img01.jpg" id="image22" media-type="image/jpeg"/>
+	<item href="images/452_img01.jpg" id="image23" media-type="image/jpeg"/>
+	<item href="images/491_img01.jpg" id="image24" media-type="image/jpeg"/>
+	<item href="images/492_img01.jpg" id="image25" media-type="image/jpeg"/>
+	<item href="images/87_img01.jpg" id="image26" media-type="image/jpeg"/>
+	<item href="images/93_img01.jpg" id="image27" media-type="image/jpeg"/>
+	<item href="images/TopChap5.jpg" id="image28" media-type="image/jpeg"/>
+	<item href="images/TopChap6.jpg" id="image29" media-type="image/jpeg"/>
+	<item href="images/bub01.jpg" id="image30" media-type="image/jpeg"/>
+	<item href="images/bub02_1.jpg" id="image31" media-type="image/jpeg"/>
+	<item href="images/bub02_2.jpg" id="image32" media-type="image/jpeg"/>
+	<item href="images/bub02_3.jpg" id="image33" media-type="image/jpeg"/>
+	<item href="images/bub02_4.jpg" id="image34" media-type="image/jpeg"/>
+	<item href="images/bub02_5.jpg" id="image35" media-type="image/jpeg"/>
+	<item href="images/bub02_6.jpg" id="image36" media-type="image/jpeg"/>
+	<item href="images/bub02_7.jpg" id="image37" media-type="image/jpeg"/>
+	<item href="images/bub03_1.jpg" id="image38" media-type="image/jpeg"/>
+	<item href="images/bub03_2.jpg" id="image39" media-type="image/jpeg"/>
+	<item href="images/bub03_3.jpg" id="image40" media-type="image/jpeg"/>
+	<item href="images/bub03_4.jpg" id="image41" media-type="image/jpeg"/>
+	<item href="images/bub03_5.jpg" id="image42" media-type="image/jpeg"/>
+	<item href="images/bub04_1.jpg" id="image43" media-type="image/jpeg"/>
+	<item href="images/bub04_2.jpg" id="image44" media-type="image/jpeg"/>
+	<item href="images/bub04_3.jpg" id="image45" media-type="image/jpeg"/>
+	<item href="images/bub04_4.jpg" id="image46" media-type="image/jpeg"/>
+	<item href="images/bub04_5.jpg" id="image47" media-type="image/jpeg"/>
+	<item href="images/bub04_6.jpg" id="image48" media-type="image/jpeg"/>
+	<item href="images/bub05_1.jpg" id="image49" media-type="image/jpeg"/>
+	<item href="images/bub05_2.jpg" id="image50" media-type="image/jpeg"/>
+	<item href="images/bub05_3.jpg" id="image51" media-type="image/jpeg"/>
+	<item href="images/bub05_4.jpg" id="image52" media-type="image/jpeg"/>
+	<item href="images/bub05_5.jpg" id="image53" media-type="image/jpeg"/>
+	<item href="images/bub06.jpg" id="image54" media-type="image/jpeg"/>
+	<item href="images/bub07_1.jpg" id="image55" media-type="image/jpeg"/>
+	<item href="images/bub07_2.jpg" id="image56" media-type="image/jpeg"/>
+	<item href="images/bub07_3.jpg" id="image57" media-type="image/jpeg"/>
+	<item href="images/bub07_4.jpg" id="image58" media-type="image/jpeg"/>
+	<item href="images/bub07_5.jpg" id="image59" media-type="image/jpeg"/>
+	<item href="images/bub07_6.jpg" id="image60" media-type="image/jpeg"/>
+	<item href="images/bub07_7.jpg" id="image61" media-type="image/jpeg"/>
+	<item href="images/bub07_8.jpg" id="image62" media-type="image/jpeg"/>
+	<item href="images/bub08_1.jpg" id="image63" media-type="image/jpeg"/>
+	<item href="images/bub08_2.jpg" id="image64" media-type="image/jpeg"/>
+	<item href="images/bub08_3.jpg" id="image65" media-type="image/jpeg"/>
+	<item href="images/bub08_4.jpg" id="image66" media-type="image/jpeg"/>
+	<item href="images/bub09_1.jpg" id="image67" media-type="image/jpeg"/>
+	<item href="images/bub09_2.jpg" id="image68" media-type="image/jpeg"/>
+	<item href="images/bub09_3.jpg" id="image69" media-type="image/jpeg"/>
+	<item href="images/bub09_4.jpg" id="image70" media-type="image/jpeg"/>
+	<item href="images/bub10_1.jpg" id="image71" media-type="image/jpeg"/>
+	<item href="images/bub10_2.jpg" id="image72" media-type="image/jpeg"/>
+	<item href="images/bub10_3.jpg" id="image73" media-type="image/jpeg"/>
+	<item href="images/bub10_4.jpg" id="image74" media-type="image/jpeg"/>
+	<item href="images/bub10_5.jpg" id="image75" media-type="image/jpeg"/>
+	<item href="images/bub10_6.jpg" id="image76" media-type="image/jpeg"/>
+	<item href="images/bub11.jpg" id="image77" media-type="image/jpeg"/>
+	<item href="images/bub12_1.jpg" id="image78" media-type="image/jpeg"/>
+	<item href="images/bub12_2.jpg" id="image79" media-type="image/jpeg"/>
+	<item href="images/bub12_3.jpg" id="image80" media-type="image/jpeg"/>
+	<item href="images/bub12_4.jpg" id="image81" media-type="image/jpeg"/>
+	<item href="images/bub13_1.jpg" id="image82" media-type="image/jpeg"/>
+	<item href="images/bub13_2.jpg" id="image83" media-type="image/jpeg"/>
+	<item href="images/bub13_3.jpg" id="image84" media-type="image/jpeg"/>
+	<item href="images/bub13_4.jpg" id="image85" media-type="image/jpeg"/>
+	<item href="images/bub14_1.jpg" id="image86" media-type="image/jpeg"/>
+	<item href="images/bub14_2.jpg" id="image87" media-type="image/jpeg"/>
+	<item href="images/bub14_3.jpg" id="image88" media-type="image/jpeg"/>
+	<item href="images/bub14_4.jpg" id="image89" media-type="image/jpeg"/>
+	<item href="images/bub14_5.jpg" id="image90" media-type="image/jpeg"/>
+	<item href="images/bub14_6.jpg" id="image91" media-type="image/jpeg"/>
+	<item href="images/bub15_4.jpg" id="image92" media-type="image/jpeg"/>
+	<item href="images/bub15_5.jpg" id="image93" media-type="image/jpeg"/>
+	<item href="images/bub16_1.jpg" id="image94" media-type="image/jpeg"/>
+	<item href="images/bub16_2.jpg" id="image95" media-type="image/jpeg"/>
+	<item href="images/bub16_3.jpg" id="image96" media-type="image/jpeg"/>
+	<item href="images/bub16_4.jpg" id="image97" media-type="image/jpeg"/>
+	<item href="images/bub17.jpg" id="image98" media-type="image/jpeg"/>
+	<item href="images/bub18_1.jpg" id="image99" media-type="image/jpeg"/>
+	<item href="images/bub18_2.jpg" id="image100" media-type="image/jpeg"/>
+	<item href="images/bub18_3.jpg" id="image101" media-type="image/jpeg"/>
+	<item href="images/bub19_1.jpg" id="image102" media-type="image/jpeg"/>
+	<item href="images/bub19_2.jpg" id="image103" media-type="image/jpeg"/>
+	<item href="images/bub19_3.jpg" id="image104" media-type="image/jpeg"/>
+	<item href="images/bub20_1.jpg" id="image105" media-type="image/jpeg"/>
+	<item href="images/bub20_2.jpg" id="image106" media-type="image/jpeg"/>
+	<item href="images/bub20_3.jpg" id="image107" media-type="image/jpeg"/>
+	<item href="images/bub21_1.jpg" id="image108" media-type="image/jpeg"/>
+	<item href="images/bub21_2.jpg" id="image109" media-type="image/jpeg"/>
+	<item href="images/bub21_3.jpg" id="image110" media-type="image/jpeg"/>
+	<item href="images/bub21_4.jpg" id="image111" media-type="image/jpeg"/>
+	<item href="images/chap_3_end_table.jpg" id="image112" media-type="image/jpeg"/>
+	<item href="images/fig2_1.jpg" id="image113" media-type="image/jpeg"/>
+	<item href="images/fig_1_1.jpg" id="image114" media-type="image/jpeg"/>
+	<item href="images/fig_1_2.jpg" id="image115" media-type="image/jpeg"/>
+	<item href="images/fig_1_3.jpg" id="image116" media-type="image/jpeg"/>
+	<item href="images/fig_1_4.jpg" id="image117" media-type="image/jpeg"/>
+	<item href="images/fig_3_4.jpg" id="image118" media-type="image/jpeg"/>
+	<item href="images/fig_3_6.jpg" id="image119" media-type="image/jpeg"/>
+	<item href="images/fig_5_1.jpg" id="image120" media-type="image/jpeg"/>
+	<item href="images/fig_5_2.jpg" id="image121" media-type="image/jpeg"/>
+	<item href="images/fig_5_4.jpg" id="image122" media-type="image/jpeg"/>
+	<item href="images/fig_5_5.jpg" id="image123" media-type="image/jpeg"/>
+	<item href="images/fig_6_11.jpg" id="image124" media-type="image/jpeg"/>
+	<item href="images/fig_6_12.jpg" id="image125" media-type="image/jpeg"/>
+	<item href="images/fig_6_13.jpg" id="image126" media-type="image/jpeg"/>
+	<item href="images/fig_6_2.jpg" id="image127" media-type="image/jpeg"/>
+	<item href="images/fig_6_3.jpg" id="image128" media-type="image/jpeg"/>
+	<item href="images/fig_6_4.jpg" id="image129" media-type="image/jpeg"/>
+	<item href="images/fig_6_5.jpg" id="image130" media-type="image/jpeg"/>
+	<item href="images/fig_6_6.jpg" id="image131" media-type="image/jpeg"/>
+	<item href="images/fig_6_7.jpg" id="image132" media-type="image/jpeg"/>
+	<item href="images/fig_6_8.jpg" id="image133" media-type="image/jpeg"/>
+	<item href="images/fig_6_9.jpg" id="image134" media-type="image/jpeg"/>
+	<item href="images/other04.jpg" id="image135" media-type="image/jpeg"/>
+	<item href="images/other05.jpg" id="image136" media-type="image/jpeg"/>
+	<item href="images/other14.jpg" id="image137" media-type="image/jpeg"/>
+	<item href="images/other23.jpg" id="image138" media-type="image/jpeg"/>
+	<item href="images/other31.jpg" id="image139" media-type="image/jpeg"/>
+	<item href="images/questionnaire.jpg" id="image140" media-type="image/jpeg"/>
+	<item href="images/square.gif" id="image141" media-type="image/gif"/>
+	<item href="images/table_2_1.jpg" id="image142" media-type="image/jpeg"/>
+	<item href="images/table_2_2.jpg" id="image143" media-type="image/jpeg"/>
+	<item href="images/table_4_4.jpg" id="image144" media-type="image/jpeg"/>
+	<item href="images/table_5_1.jpg" id="image145" media-type="image/jpeg"/>
+	<item href="images/table_5_4.jpg" id="image146" media-type="image/jpeg"/>
+	<item href="images/table_5_5.jpg" id="image147" media-type="image/jpeg"/>
+	<item href="images/table_5_6.jpg" id="image148" media-type="image/jpeg"/>
+	<item href="images/table_5_7.jpg" id="image149" media-type="image/jpeg"/>
+	<item href="images/table_5_8.jpg" id="image150" media-type="image/jpeg"/>
+	<item href="images/table_5_9.jpg" id="image151" media-type="image/jpeg"/>
+	<item href="images/table_6_1.jpg" id="image152" media-type="image/jpeg"/>
+	<item href="images/table_6_3.jpg" id="image153" media-type="image/jpeg"/>
+	<item href="images/table_6_4.jpg" id="image154" media-type="image/jpeg"/>
+	<item href="images/table_6_5.jpg" id="image155" media-type="image/jpeg"/>
+	<item href="images/table_6_6.jpg" id="image156" media-type="image/jpeg"/>
+	<item href="images/titlepage.jpg" id="image157" media-type="image/jpeg"/>
+	<item href="styles.css" id="css1" media-type="text/css"/>
+</manifest>
+		<spine toc="toc">
+			<itemref idref="item1"/>
+	<itemref idref="item2"/>
+	<itemref idref="item3"/>
+	<itemref idref="item4"/>
+	<itemref idref="item5"/>
+	<itemref idref="item6"/>
+	<itemref idref="item7"/>
+	<itemref idref="item8"/>
+	<itemref idref="item9"/>
+	<itemref idref="item10"/>
+	<itemref idref="item11"/>
+	<itemref idref="item12"/>
+	<itemref idref="item13"/>
+	<itemref idref="item14"/>
+	<itemref idref="item15"/>
+	<itemref idref="item16"/>
+	<itemref idref="item17"/>
+	<itemref idref="item18"/>
+	<itemref idref="item19"/>
+	<itemref idref="item20"/>
+	<itemref idref="item21"/>
+	<itemref idref="item22"/>
+	<itemref idref="item23"/>
+	<itemref idref="item24"/>
+	<itemref idref="item25"/>
+	<itemref idref="item26"/>
+	<itemref idref="item27"/>
+	<itemref idref="item28"/>
+	<itemref idref="item29"/>
+	<itemref idref="item30"/>
+	<itemref idref="item31"/>
+	<itemref idref="item32"/>
+	<itemref idref="item33"/>
+	<itemref idref="item34"/>
+	<itemref idref="item35"/>
+	<itemref idref="item36"/>
+	<itemref idref="item37"/>
+	<itemref idref="item38"/>
+	<itemref idref="item39"/>
+	<itemref idref="item40"/>
+	<itemref idref="item41"/>
+	<itemref idref="item42"/>
+	<itemref idref="item43"/>
+	<itemref idref="item44"/>
+	<itemref idref="item45"/>
+	<itemref idref="item46"/>
+	<itemref idref="item47"/>
+	<itemref idref="item48"/>
+	<itemref idref="item49"/>
+	<itemref idref="item50"/>
+	<itemref idref="item51"/>
+	<itemref idref="item52"/>
+	<itemref idref="item53"/>
+	<itemref idref="item54"/>
+	<itemref idref="item55"/>
+	<itemref idref="item56"/>
+	<itemref idref="item57"/>
+	<itemref idref="item58"/>
+	<itemref idref="item59"/>
+	<itemref idref="item60"/>
+	<itemref idref="item61"/>
+	<itemref idref="item62"/>
+	<itemref idref="item63"/>
+	<itemref idref="item64"/>
+	<itemref idref="item65"/>
+</spine>
+		<guide>
+		    <reference href="5-preface.xhtml" title="Startup Page" type="text"/>
+		    <reference href="4-TOC.xhtml" title="Table of Contents" type="toc"/>
+		</guide>
+	</package>

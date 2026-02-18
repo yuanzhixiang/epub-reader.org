@@ -1,0 +1,622 @@
+/* ---- Document Styles ---- */
+h1 {text-align: center; margin-top: 0px; margin-bottom: 0px;}
+h2 {text-align: center; margin-top: 0px; margin-bottom: 0px;}
+h3 {text-align: center; margin-top: 0px; margin-bottom: 0px;}
+h4 {text-align: left; margin-top: 0px; margin-bottom: 0px;}
+h5 {text-align: left;}
+h6 {text-align: left;}
+
+.ind {text-indent: 2em;}
+.ind10 {text-indent: 2em; margin-top: 10px;}
+.ind20 {text-indent: 2em; margin-top: 20px;}
+.ind30 {text-indent: 2em; margin-top: 30px;}
+.ind40 {text-indent: 2em; margin-top: 20px;}
+.ind50 {text-indent: 2em; margin-top: 50px;}
+.ind60 {text-indent: 2em; margin-top: 60px;}
+
+.noind {text-indent: 0;}
+.noind10 {text-indent: 0; margin-top: 10px;}
+.noind20 {text-indent: 0; margin-top: 20px;}
+.noind30 {text-indent: 0; margin-top: 30px;}
+.noind40 {text-indent: 0; margin-top: 40px;}
+.noind50 {text-indent: 0; margin-top: 50px;}
+.noind60 {text-indent: 0; margin-top: 60px;}
+
+.center {text-indent: 0; text-align: center;}
+.center_ss {
+	text-indent: 0;
+	text-align: center;
+	font-family: "Arial", sans-serif;
+}
+.center10 {text-indent: 0; text-align: center; margin-top: 10px;}
+.center20 {text-indent: 0; text-align: center; margin-top: 20px;}
+.center30 {text-indent: 0; text-align: center; margin-top: 30px;}
+.center40 {text-indent: 0; text-align: center; margin-top: 40px;}
+.center50 {text-indent: 0; text-align: center; margin-top: 50px;}
+.center60 {text-indent: 0; text-align: center; margin-top: 60px;}
+.center70 {text-indent: 0; text-align: center; margin-top: 70px;}
+.center80 {text-indent: 0; text-align: center; margin-top: 80px;}
+
+.lind {text-align: left;text-indent: 2em;}
+
+.lnoind {
+	text-indent: 0;
+	text-align: left;
+}
+.lnoind20 {
+	text-indent: 0;
+	text-align: left;
+	margin-top: 20px;
+}
+
+.right {text-indent: 0; text-align: right;}
+.right10 {text-indent: 0; text-align: right; margin-top: 10px;}
+.right20 {text-indent: 0; text-align: right; margin-top: 20px;}
+.right30 {text-indent: 0; text-align: right; margin-top: 30px;}
+.right40 {text-indent: 0; text-align: right; margin-top: 40px;}
+.right50 {text-indent: 0; text-align: right; margin-top: 50px;}
+
+.left {text-align: left;}
+.left_ss {
+	text-align: left;
+	font-family: "Arial", sans-serif;
+}
+.left10 {text-align: left; margin-top: 10px;}
+.left20 {text-align: left; margin-top: 20px;}
+.left20_ss {
+	text-align: left;
+	margin-top: 20px;
+	font-family: "Arial", sans-serif;
+}
+.left30 {text-align: left; margin-top: 30px;}
+.left40 {text-align: left; margin-top: 40px;}
+.left50 {text-align: left; margin-top: 50px;}
+.left60 {text-align: left; margin-top: 60px;}
+
+.copy1 {
+	text-indent: 0;
+	font-size: 0.6em;
+	text-align: left;
+}
+.copy2 {
+	text-indent: 0;
+	font-size: 0.6em;
+	margin-top: 20px;
+	text-align: left;
+}
+.copy3 {
+	text-indent: 0;
+	font-size: 0.6em;
+	margin-top: 40px;
+	text-align: left;
+}
+
+.chapter {
+	text-indent: 0;
+	text-align: center;
+	font-size: 1em;
+	font-weight: normal;
+	margin-top: 40px;
+	font-family: "Arial", sans-serif;
+}
+.chapter0 {
+	text-indent: 0;
+	text-align: center;
+	font-size: 1em;
+	font-weight: normal;
+	margin-top: 0px;
+	padding-top: 0px;
+	font-family: "Arial", sans-serif;
+}
+.chapter2 {
+	text-indent: 0;
+	text-align: center;
+	font-weight: normal;
+	margin-top: 40px;
+	font-family: "Arial", sans-serif;
+}
+
+h3.left20 {
+	font-weight: normal;
+}
+h3.left40 {
+	font-weight: normal;
+}
+
+.floatl {
+	float: left;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	width: 40%;
+}
+.floatr {
+	float: right;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	width: 40%;
+}
+.floatr_full {
+	float: right;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+.note {
+	text-indent: 0;
+	text-align: left;
+	font-size: 0.9em;
+	margin-top: 10px;
+}
+.note20 {
+	text-indent: 0;
+	text-align: left;
+	font-size: 0.9em;
+	margin-top: 20px;
+}
+
+div.blockquote {
+	font-family: "Arial", sans-serif;
+	font-size: 0.9em;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+table.table {
+	color: #000000;
+}
+table.nondialogue {
+	color: #000000;
+}
+.td {
+	vertical-align: top;
+}
+.td2 {
+	vertical-align: top;
+	width: 6em;
+}
+
+span.thin {
+	font-weight: normal;
+}
+div.figure {
+	margin: 20px 0px 20px 0px;
+	page-break-inside: avoid;
+}
+.toc1 {
+	text-align: left;
+	margin-top: 10px;
+}
+.toc2 {text-align: left;}
+.toc3 {text-align: left;}
+.toc4 {text-align: left;}
+.toc5 {text-align: left;}
+.toc6 {text-align: left;}
+.toc7 {text-align: left;}
+.toc8 {text-align: left;}
+.toc9 {text-align: left;}
+.list1 {text-align: left;}
+.list2 {text-align: left;}
+.list3 {text-align: left;}
+.list4 {text-align: left;}
+.list5 {text-align: left;}
+.list6 {text-align: left;}
+.list7 {text-align: left;}
+.list8 {text-align: left;}
+.list9 {text-align: left;}
+.hang1 {text-align: left;}
+.hang2 {text-align: left;}
+.hang3 {text-align: left;}
+.hang4 {text-align: left;}
+.hang5 {text-align: left;}
+.hang6 {text-align: left;}
+.hang7 {text-align: left;}
+.hang8 {text-align: left;}
+.hang9 {text-align: left;}
+.biblio {text-align: left;}
+.idx1 {text-align: left;}
+.idx2 {text-align: left;}
+.idx3 {text-align: left;}
+.idx4 {text-align: left;}
+.idx5 {text-align: left;}
+.idx6 {text-align: left;}
+.idx7 {text-align: left;}
+.idx8 {text-align: left;}
+.idx9 {text-align: left;}
+.poem1 {text-align: left;}
+.poem2 {text-align: left;}
+.poem3 {text-align: left;}
+.poem4 {text-align: left;}
+.poem5 {text-align: left;}
+.poem6 {text-align: left;}
+.poem7 {text-align: left;}
+.poem8 {text-align: left;}
+.poem9 {text-align: left;}
+.poem1init {text-align: left;}
+.poem2init {text-align: left;}
+.poem3init {text-align: left;}
+.poem4init {text-align: left;}
+.poem5init {text-align: left;}
+.poem6init {text-align: left;}
+.poem7init {text-align: left;}
+.poem8init {text-align: left;}
+.poem9init {text-align: left;}
+.strike {text-decoration: line-through;}
+.caption {
+	text-indent: 0;
+	margin: 10px 30px 0px 30px;
+	font-size: 0.9em;
+	text-align: center;
+	font-family: "Arial", sans-serif;
+	page-break-before: avoid;
+}
+.break {
+	text-indent: 0;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+.top {margin-top: 30px;}
+.bottom {margin-bottom: 30px;}
+.topbottom {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.gray {color:#505050;}
+div.lettertype {
+	margin: 20px;
+}
+div.letterhand {
+	margin: 20px;
+}
+div.pullquoteright {
+	margin: 20px;
+}
+div.pullquoteright p {
+	text-indent: 0;
+	text-align: center;
+}
+div.pullquoteleft {
+	margin: 20px;
+}
+div.pullquoteleft p {
+	text-indent: 0;
+	text-align: center;
+}
+div.box {
+	margin: 20px;
+}
+div.image {
+	margin: 30px 0;
+}
+
+/* ---- Default Styles ---- */
+@page {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+/*
+@font-face {
+	font-family: "";
+	font-weight: normal;
+	src: url(.ttf);
+}
+*/
+body {
+	padding: 0;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+h1, h2, h3, h4, h5, h6 {
+	page-break-after: avoid;
+	hyphens: none !important;
+	-moz-hyphens: none !important;
+	-webkit-hyphens: none !important;
+	adobe-hyphenate: none !important;
+}
+
+/* ---- Paragraphs ---- */
+p {
+	margin-top: 0;
+	margin-bottom: 0;
+	text-indent: 2em;
+	line-height: 1.5em;
+	text-align: justify;
+}
+.poem1, .toc1, .hang1, .list1, .biblio{
+	text-indent: -30px;
+	margin-left: 30px;
+	text-align: left;
+}
+.poem2, .toc2, .hang2, .list2{
+	text-indent: -30px;
+	margin-left: 60px;
+	text-align: left;
+}
+.poem3, .toc3, .hang3, .list3{
+	text-indent: -30px;
+	margin-left: 90px;
+	text-align: left;
+}
+.poem4, .toc4, .hang4, .list4{
+	text-indent: -30px;
+	margin-left: 120px;
+	text-align: left;
+}
+.poem5, .toc5, .hang5, .list5{
+	text-indent: -30px;
+	margin-left: 150px;
+	text-align: left;
+}
+.poem6, .toc6, .hang6, .list6{
+	text-indent: -30px;
+	margin-left: 180px;
+	text-align: left;
+}
+.poem7, .toc7, .hang7, .list7{
+	text-indent: -30px;
+	margin-left: 210px;
+	text-align: left;
+}
+.poem8, .toc8, .hang8, .list8{
+	text-indent: -30px;
+	margin-left: 240px;
+	text-align: left;
+}
+.poem9, .toc9, .hang9, .list9{
+	text-indent: -30px;
+	margin-left: 270px;
+	text-align: left;
+}
+.poem1init {
+	text-indent: -35px;
+	margin-left: 30px;
+	text-align: left;
+}
+.poem2init {
+	text-indent: -35px;
+	margin-left: 60px;
+	text-align: left;
+}
+.poem3init {
+	text-indent: -35px;
+	margin-left: 90px;
+	text-align: left;
+}
+.poem4init {
+	text-indent: -35px;
+	margin-left: 120px;
+	text-align: left;
+}
+.poem5init {
+	text-indent: -35px;
+	margin-left: 150px;
+	text-align: left;
+}
+.poem6init {
+	text-indent: -35px;
+	margin-left: 180px;
+	text-align: left;
+}
+.poem7init {
+	text-indent: -35px;
+	margin-left: 210px;
+	text-align: left;
+}
+.poem8init {
+	text-indent: -35px;
+	margin-left: 240px;
+	text-align: left;
+}
+.poem9init {
+	text-indent: -35px;
+	margin-left: 270px;
+	text-align: left;
+}
+.idx1 {
+	text-indent: -40px;
+	margin-left: 40px;
+	text-align: left;
+}
+.idx2 {
+	text-indent: -40px;
+	margin-left: 70px;
+	text-align: left;
+}
+.idx3 {
+	text-indent: -40px;
+	margin-left: 100px;
+	text-align: left;
+}
+.idx4 {
+	text-indent: -40px;
+	margin-left: 130px;
+	text-align: left;
+}
+.idx5 {
+	text-indent: -40px;
+	margin-left: 160px;
+	text-align: left;
+}
+.idx6 {
+	text-indent: -40px;
+	margin-left: 190px;
+	text-align: left;
+}
+.idx7 {
+	text-indent: -40px;
+	margin-left: 220px;
+	text-align: left;
+}
+.idx8 {
+	text-indent: -40px;
+	margin-left: 250px;
+	text-align: left;
+}
+.idx9 {
+	text-indent: -40px;
+	margin-left: 280px;
+	text-align: left;
+}
+.copy1 {
+	font-size: 0.9em;
+}
+.copy2 {
+	font-size: 0.9em;
+}
+.copy3 {
+	font-size: 0.9em;
+}
+
+/* ---- Lists ---- */
+span.square_margin {
+	margin-left: -20px;
+	padding: 0px;
+	vertical-align: middle;
+}
+ul.square {
+	list-style-type: none;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+ul.disc {
+	list-style-type: disc;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+ul.circle {list-style-type: circle;}
+ul.none {
+	list-style-type: none;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+ol.decimal {
+	list-style-type: decimal;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+ol.upper-alpha {list-style-type: upper-alpha;}
+ol.lower-alpha {
+	list-style-type: lower-alpha;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+ol.upper-roman {list-style-type: upper-roman;}
+ol.lower-roman {list-style-type: lower-roman;}
+li {
+	line-height: 1.5em;
+	text-align: justify;
+}
+ul ol {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+/* ---- Table ---- */
+table {
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+th, td {
+	padding: 4px;
+}
+table.border {
+	border: 1px solid black;
+}
+table.border th, table.border td {
+	border: 1px solid black;
+}
+
+/* ---- Divs ---- */
+div.lettertype {
+	margin: 30px;
+}
+div.letterhand {
+	margin: 30px;
+}
+div.pullquoteright {
+	float: right;
+	margin: 15px 0 15px 15px;
+	padding: 15px 0;
+	width: 150px;
+	border-top: 3px double #505050;
+	border-bottom: 3px double #505050;
+}
+div.pullquoteleft {
+	float: left;
+	margin: 15px 15px 15px 0;
+	padding: 15px 0;
+	width: 150px;
+	border-top: 3px double #505050;
+	border-bottom: 3px double #505050;
+}
+div.pullquoteleft p, div.pullquoteright p {
+	text-indent: 0;
+	text-align: center;
+	font-size: 1.2em;
+}
+div.box {
+	margin: 30px;
+	padding: 15px;
+	border: 1px solid black;
+}
+div.image {
+	margin: 30px 0;
+}
+
+
+/* ---- Other ---- */
+blockquote {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+blockquote p {
+	text-indent:0;
+}
+sup {
+	font-size: 0.8em;
+	vertical-align: 5px;
+}
+sub {
+	font-size: 0.8em;
+	vertical-align: -5px;
+}
+sup.frac {
+	font-size: 0.6em;
+	vertical-align: 0.5em;
+	line-height: 0;
+}
+sub.frac {
+	font-size: 0.6em;
+	vertical-align: -0.1em;
+	line-height: 0;
+}
+.underline {text-decoration: underline;}
+.strike {text-decoration: line-through;}
+.code, code {font-family: "Courier New", "Courier", monospace;}
+span.dropcap {
+	float: left;
+	height: 0.9em;
+	line-height: 1;
+	font-size: 3.2em;
+	font-weight: bold;
+	margin: 0 0.1em 0 0;
+}
+img {
+	width: auto;
+	max-width: 100%;
+}
+img#coverimage {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}

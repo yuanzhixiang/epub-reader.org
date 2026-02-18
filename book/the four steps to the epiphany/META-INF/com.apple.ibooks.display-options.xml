@@ -1,0 +1,10 @@
+
+		<display_options>
+			<!-- allowed values for platform "iphone", "ipad", "*" -->
+			<platform name="*">
+				<option name="fixed-layout">false</option>
+				<option name="specified-fonts">true</option>
+				<option name="interactive">false</option>
+			</platform>
+		</display_options>
+	
