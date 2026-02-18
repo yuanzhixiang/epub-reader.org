@@ -151,4 +151,27 @@ describe("four steps heading dedupe", function () {
     expect(body.querySelector("h1.chapter2")).toBeNull();
     expect(body.firstElementChild && body.firstElementChild.classList.contains("blockquote")).toBe(true);
   });
+
+  it("for chapter 5, keeps the leading image block and removes duplicated chapter headings", function () {
+    var chapter5 = null;
+    for (var i = 0; i < chapters.length; i += 1) {
+      if (chapters[i].path === "OEBPS/16-chap5.xhtml") {
+        chapter5 = chapters[i];
+        break;
+      }
+    }
+
+    expect(chapter5).not.toBeNull();
+    expect(chapter5.title).toBe("Chapter 5: Customer Creation");
+
+    var dedupedHtml = removeDuplicateLeadingHeading(chapter5.html, chapter5.title);
+    var parser = new DOMParser();
+    var doc = parser.parseFromString("<!doctype html><html><body>" + dedupedHtml + "</body></html>", "text/html");
+    var body = doc.body;
+
+    expect(body.querySelector("p#ch16__chap5__0 img")).not.toBeNull();
+    expect(body.querySelector("h1.chapter")).toBeNull();
+    expect(body.querySelector("h1.chapter2")).toBeNull();
+    expect(body.firstElementChild && body.firstElementChild.id).toBe("ch16__chap5__0");
+  });
 });

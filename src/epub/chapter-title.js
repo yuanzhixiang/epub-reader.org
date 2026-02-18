@@ -98,14 +98,11 @@ function collectLeadingTitleCandidates(body, maxCount) {
   var node = body.firstElementChild;
 
   while (node && out.length < maxCount) {
-    if (isEmptyNode(node)) {
+    if (isSkippableLeadingNode(node)) {
       node = node.nextElementSibling;
       continue;
     }
     if (!isDuplicateTitleCandidate(node)) {
-      break;
-    }
-    if (hasMeaningfulContentBeforeNode(body, node)) {
       break;
     }
 
@@ -114,6 +111,30 @@ function collectLeadingTitleCandidates(body, maxCount) {
   }
 
   return out;
+}
+
+function isSkippableLeadingNode(node) {
+  if (!node || node.nodeType !== 1) {
+    return false;
+  }
+  if (isEmptyNode(node)) {
+    return true;
+  }
+  return isMediaOnlyBlock(node);
+}
+
+function isMediaOnlyBlock(node) {
+  if (!node || node.nodeType !== 1) {
+    return false;
+  }
+  var tag = localName(node);
+  if (["p", "div", "figure", "section"].indexOf(tag) < 0) {
+    return false;
+  }
+  if (cleanText(node.textContent || "")) {
+    return false;
+  }
+  return !!node.querySelector("img,svg,picture,video,audio,canvas");
 }
 
 function removeNodesAndCleanup(body, nodes) {
