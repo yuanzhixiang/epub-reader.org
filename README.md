@@ -45,6 +45,17 @@ Clicking one TOC node renders the current node plus all descendant sections in o
 ```text
 epub-viewer/
 ├── index.html
+├── package.json
+├── src/
+│   ├── main.js
+│   └── epub/
+│       └── parser.js
+├── tests/
+│   └── epub/
+│       ├── opf.test.js
+│       ├── path.test.js
+│       └── toc.test.js
+├── vitest.config.js
 └── README.md
 ```
 
@@ -54,10 +65,17 @@ Run as a static site (recommended to avoid local file restrictions and keep beha
 
 ```bash
 cd epub-viewer
-npx serve .
+pnpm install
+pnpm dlx serve .
 ```
 
 Open the URL printed by `serve` (usually `http://localhost:3000`).
+
+## Testing
+
+```bash
+pnpm test
+```
 
 ## Deployment
 

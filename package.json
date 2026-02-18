@@ -1,0 +1,14 @@
+{
+  "name": "epub-reader-org",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm dlx serve .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4"
+  }
+}
