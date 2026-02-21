@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:pls="http://www.w3.org/2005/01/pronunciation-lexicon" xmlns:ssml="http://www.w3.org/2001/10/synthesis" xmlns:svg="http://www.w3.org/2000/svg"><head><title>Chapter 27. Two-Sided Marketplaces: Lines in the Sand</title><link href="lean.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"/><link href="pt03.html" rel="up" title="Part III. Lines in the Sand"/><link href="ch26.html" rel="prev" title="Chapter 26. User-Generated Content: Lines in the Sand"/><link href="ch28.html" rel="next" title="Chapter 28. What to Do When You Don’t Have a Baseline"/>
+<meta content="urn:uuid:c090c7b8-8be3-4c23-81e0-0eef5a7d2171" name="Adept.expected.resource"/></head><body><section class="chapter" epub:type="chapter" id="two-sided_marketplaces_lines_in_the_sand" title="Chapter 27. Two-Sided Marketplaces: Lines in the Sand"><div class="titlepage"><div><div><h2 class="title">Chapter 27. Two-Sided Marketplaces: Lines in the Sand</h2></div></div></div><p><a class="indexterm" id="iddle1038"/><a class="indexterm" id="iddle1712"/><a class="indexterm" id="iddle2226"/>Two-sided marketplaces are really a blend of two other
+      models: e-commerce (because they’re built around transactions between
+      buyers and sellers) and user-generated content (because they rely on
+      sellers to create and manage listings whose quality affects the revenue
+      and health of the marketplace). This means there’s a combination of
+      analytics you need to care about.</p><p>There is another reason analytics matter to marketplaces. Sellers
+      seldom have the sophistication to analyze pricing, the effectiveness of
+      their pictures, or what copy sells best. As the marketplace owner, you
+      can help them with this analysis. In fact, you can do it better than
+      they can, because you have access to the aggregate data from all sellers
+      on the site.</p><p>An individual merchant might not know what price to charge. Even
+      if he could do the analysis, he wouldn’t have enough data points. But
+      since you have access to <span class="emphasis"><em>all</em></span> transactions, you may
+      be able to help him optimize pricing (and improve your revenues along
+      the way). Airbnb did this kind of experimental optimization on behalf of
+      its vendors when it tested the impact of paid photography services on
+      rental rates—then rolled the service out to property owners.</p><p>We’ve looked at both the e-commerce and UGC models in other
+      chapters, but here we’ll briefly consider some of the unique challenges
+      faced by two-sided marketplaces.</p><div class="sect1" title="Transaction Size"><div class="titlepage"><div><div><h2 class="title" id="transaction_size" style="clear: both">Transaction Size</h2></div></div></div><p><a class="indexterm" id="iddle1357"/><a class="indexterm" id="iddle1425"/><a class="indexterm" id="iddle2210"/><a class="indexterm" id="iddle2224"/>Some marketplaces are for infrequent, big-ticket items
+        (like houses), while others are for frequent, smaller items (like
+        those listed on eBay). This means that the number of listings per
+        seller, and the transaction price, vary widely, and a useful baseline
+        is impossible.</p><p>There are often correlations between purchase size and
+        conversion rate, however. The bigger a purchase, the more
+        consideration and comparison go into it. Smaller purchases carry less
+        risk, and may be more impulsive or whimsical than big ones.</p><div class="sect2" title="Bottom Line"><div class="titlepage"><div><div><h3 class="title" id="bottom_line-id00045">Bottom Line</h3></div></div></div><p>We can’t tell you what your typical transaction size will be,
+          but we can tell you that you should measure it, along with
+          conversion rates, to understand your buyers’ behavior—then pass this
+          information along to sellers.</p></div></div><div class="sect1 case_study" title="What Etsy Watches"><div class="titlepage"><div><div><h2 class="title" id="case_study_what_etsy_watches" style="clear: both">What Etsy Watches</h2></div></div></div><p>Etsy is an online store for creative types to share and sell
+        their work. Founded in 2005 by a painter, a photographer, and a
+        carpenter who had nowhere to sell their work online, the company now
+        sells over half a billion dollars a year through its shared
+        marketplace.</p><p>The company looks at a lot of metrics. It tracks revenue metrics
+        such as shopping carts (individual sales), number of items sold, gross
+        monthly sales, and total fees collected from those sales. It also
+        looks at the growth of buyers and sellers by counting the number of
+        new accounts, new sellers, and total confirmed accounts. Over time,
+        the company has started tracking year-on-year increase in these core
+        metrics.</p><p>Beyond these fundamentals, Etsy tracks the growth of individual
+        product categories, time to first sale by a user, average order value,
+        percentage of visits that convert to a sale, percentage of return
+        buyers, and distinct sellers within a product category. It also breaks
+        down time-to-first-sale and average order value by product
+        category.</p><p>Recently, the company has started looking more closely at values
+        like the total gross margin sold and percent of converting visits by
+        mobile versus desktop, as well as the number of active sellers in a
+        region. It’s also calculating smoothed historical averages that act as
+        a baseline against which to identify any anomalies in the data.</p><p>Etsy VP of Engineering Kellan Elliott-McCrae says that for any
+        given product, Etsy calculates a number of metrics, particularly
+        within site search. The company runs its search system like any other
+        ad network, <a class="indexterm" id="iddle1179"/>and “constantly measures demand (searches) and supply
+        (items) for all the keywords passing through the system, making them
+        available for purchase and pricing them when there is both demand and
+        supply.”</p><p>When Etsy adopted a continuous deployment approach to
+        engineering, its initial business dashboards included registrations
+        per second, logins per second (against login errors), checkouts per
+        second (against checkout errors), new and renewed listings, and
+        “screwed users” (distinct users seeing an error message).
+        “Importantly, these are all rate-based metrics designed to quickly
+        highlight that we might have broken something,” says Kellan. “Later we
+        added metrics like average and 95th percentile page-load times, and
+        monitored for performance regressions.”</p><p>Most recently, Etsy has been trying to make it clear how various
+        features contribute to a sale. “For example, we can attribute the
+        percentage of sales that come directly from search, but we’ve found
+        that visitors who first browse, and <span class="emphasis"><em>then</em></span> search,
+        have a higher conversion rate,” says Kellan. “Of course, on the flip
+        side, conversion rate is a very difficult metric to get statistical
+        significance on, as purchases happen rarely enough that when analyzing
+        them against the site-wide clickstream, you get anomalous
+        results.”</p><p>Kellan points out that Etsy’s help pages have the best
+        conversion rate for purchases anywhere on the site (because people go
+        there when they’re trying to accomplish something), but jokes that the
+        company hasn’t followed through on the logical product decision of
+        making help pages the core site experience. “To get meaningful data,
+        you really have to scope your experiments.”</p><p>Even with the site’s huge sales volume, the company hasn’t gone
+        after rapid growth. “We play with a very narrow margin and so we’ve
+        historically been very cautious about stepping on the gas rather than
+        closely monitoring health metrics and growing sustainably,” he
+        explains.</p><p>Because anticipating demand helps drive sales, the company sends
+        out a monthly newsletter to sellers, which discusses analytical data,
+        market research, and historical trends. The company also has a market
+        research tool for sellers. “If a seller were to search for ‘desk’,”
+        explains Kellan, “they could check out the market research tool to see
+        that ‘desk calendars’ generally sell in the $20–$24 range, a
+        downloadable desk calendar PDF sells in the $4 range, desk lamps sell
+        in roughly the $50 range, and only a handful of actual desks are sold
+        each day.”</p><p>Etsy is a shared marketplace, but it overcame the
+        chicken-and-egg issues that two-sided markets face through
+        serendipity. “Initially our buyers and sellers were the same people.
+        We made this explicit in the <a class="indexterm" id="iddle2206"/>beginning by encouraging the sale of both crafts and
+        craft supplies,” says Kellan. “Etsy was deeply embedded in a community
+        of makers who supported each other, and initially we were helping them
+        find one another.”</p><p><span class="strong"><strong>Summary</strong></span></p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Etsy is metrics-driven, but those metrics have become
+            increasingly business-focused as it’s moved past product/market
+            fit.</p></li><li class="listitem"><p>The company sidestepped the chicken-and-egg problem most
+            marketplaces face because initially, its buyers were also
+            sellers.</p></li><li class="listitem"><p>Analytics are also shared with vendors, in order to help
+            them sell more successfully—which in turn helps Etsy.</p></li></ul></div><p><span class="strong"><strong>Analytics Lessons
+        Learned</strong></span></p><p>The buyer/seller model in a shared marketplace is a lot like
+        inventory in an advertising network. Knowing what buyers want, and how
+        well you’re meeting that demand, is an early indicator of what your
+        revenues will be like. And because you want to help your sellers, you
+        should selectively share analytical data with them that will make them
+        better at selling.</p></div><div class="sect1" title="Top 10 Lists"><div class="titlepage"><div><div><h2 class="title" id="top_10_lists" style="clear: both">Top 10 Lists</h2></div></div></div><p>Top 10 lists are a good way to start understanding how your
+        marketplace is working. Run some queries of KPIs like revenue and
+        number of transactions according to product segments:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Who are your top 10 buyers?</p></li><li class="listitem"><p>Who are your top 10 sellers?</p></li><li class="listitem"><p>What products or categories generate the majority of your
+            revenues?</p></li><li class="listitem"><p>What price ranges, times of day, and days of week experience
+            peak sales?</p></li></ul></div><p>It might seem simple, but making lists of the top 10 segments or
+        categories, and looking at what’s changing, will give you qualitative
+        insights into the health of your marketplace that you can later turn
+        into quantitative tests, and then innovations.</p><div class="sect2" title="Bottom Line"><div class="titlepage"><div><div><h3 class="title" id="bottom_line-id00046">Bottom Line</h3></div></div></div><p>Unlike a traditional e-commerce company, you don’t have a lot
+          of control over inventory and listings. But what you
+          <span class="emphasis"><em>do</em></span> have is insight into what is selling well,
+          so you can go and get more like it. If you find that a particular
+          product category, geographic region, house size, or color is selling
+          well, you can encourage those sellers—and find more like
+          them.</p></div></div></section></body></html>

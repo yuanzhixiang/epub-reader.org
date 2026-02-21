@@ -1,0 +1,382 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:pls="http://www.w3.org/2005/01/pronunciation-lexicon" xmlns:ssml="http://www.w3.org/2001/10/synthesis" xmlns:svg="http://www.w3.org/2000/svg"><head><title>Chapter 8. Model One: E-commerce</title><link href="lean.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"/><link href="pt02.html" rel="up" title="Part II. Finding the Right Metric for Right Now"/><link href="ch07.html" rel="prev" title="Chapter 7. What Business Are You In?"/><link href="ch09.html" rel="next" title="Chapter 9. Model Two: Software as a Service (SaaS)"/>
+<meta content="urn:uuid:c090c7b8-8be3-4c23-81e0-0eef5a7d2171" name="Adept.expected.resource"/></head><body><section class="chapter" epub:type="chapter" id="model_one_e-commerce" title="Chapter 8. Model One: E-commerce"><div class="titlepage"><div><div><h2 class="title">Chapter 8. Model One: E-commerce</h2></div></div></div><p><a class="indexterm" id="iddle1257"/><a class="indexterm" id="iddle1336"/>In an e-commerce company, a visitor buys something from a
+      web-based retailer. This is perhaps the most common kind of online
+      business, and it’s certainly the one that the majority of traditional
+      analytics tools are aimed at. Big retailers like Amazon, Walmart.com,
+      and Expedia are all e-commerce companies.</p><p>If the e-commerce model most closely matches your business, this
+      chapter will show you some of the most important metrics you need to
+      watch, as well as some “wrinkles” that make the analytics more
+      complex.</p><p>Early e-commerce models consisted of a relatively simple “funnel”:
+      a visitor arrived at the site, navigated through a series of pages to
+      get to a particular item, clicked “buy,” provided some payment
+      information, and completed a purchase. This is the traditional
+      “conversion funnel” from which mainstream analytics packages like
+      Omniture and Google Analytics emerged.</p><p>But modern e-commerce is seldom this simple:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>The majority of buyers find what they’re looking for through
+          search rather than by navigating across a series of pages. Shoppers
+          start with an external search and then bounce back and forth from
+          sites they visit to their search results, seeking the scent of what
+          they’re after. Once they find it, on-site navigation becomes more
+          important. This means on-site funnels are somewhat outdated;
+          keywords are more important.</p></li><li class="listitem"><p><a class="indexterm" id="iddle1030"/><a class="indexterm" id="iddle1042"/><a class="indexterm" id="iddle1340"/><a class="indexterm" id="iddle1353"/><a class="indexterm" id="iddle1526"/><a class="indexterm" id="iddle1721"/>Retailers use recommendation engines to anticipate
+          what else a buyer might want, basing their suggestions on past
+          buyers and other users with similar profiles. Few visitors see the
+          same pages as one another.</p></li><li class="listitem"><p>Retailers are always optimizing performance, which means that
+          they’re segmenting traffic. Mid- to large-size retailers segment
+          their funnel by several tests that are being run to find the right
+          products, offers, and prices.</p></li><li class="listitem"><p>Purchases begin far from the website itself, in social
+          networks, email inboxes, and online communities, making the buying
+          process harder to track.</p></li></ul></div><p>E-commerce companies make money in a straightforward way: they
+      charge for products, which they then deliver either electronically
+      (e.g., digital downloads on iTunes) or physically (e.g., shipping shoes
+      from Zappos). They spend money to acquire customers through advertising
+      and affiliate referrals. Prices are set based on what the market will
+      bear, or on expectations set by competitors. Some large retailers with
+      the budget and time to invest in it will generate prices algorithmically
+      based on supply, demand, and constant testing, which in some cases leads
+      to absurd pricing<sup>[<a class="footnote" href="#ftn.ch08fn01" id="ch08fn01">25</a>]</sup> or recommendations based on factors such as browser
+      type.</p><p>Loyalty-focused e-retailers like Amazon build a recurring
+      relationship with their users. They have a wide variety of products to
+      offer, and buyers return often, so they do everything they can to make
+      purchasing simple and automatic (in Amazon’s case, the company patented
+      the one-click purchase model, which it now licenses to other retailers,
+      including Apple).</p><p>These relationship-focused e-commerce companies encourage users to
+      build wishlists and review products, which means that while their core
+      business model is e-commerce, they care about other models, such as
+      user-generated content (UGC), too—as long as those models act as an
+      enabler for purchases. On the other hand, e-commerce retailers that
+      don’t expect frequent, repeat sales focus on getting as much from their
+      buyer as they can and on getting the buyer to spread the word.</p><div class="sect1 pattern" title="What Mode of E-commerce Are You?"><div class="titlepage"><div><div><h2 class="title" id="pattern_what_mode_of_e-commerce_are_youq" style="clear: both">What Mode of E-commerce Are You?</h2></div></div></div><p>Kevin Hillstrom of Mine That Data, a consultancy focused on
+        helping companies understand how their customers interact with
+        advertising, <a class="indexterm" id="iddle1012"/><a class="indexterm" id="iddle1053"/><a class="indexterm" id="iddle1394"/><a class="indexterm" id="iddle1535"/><a class="indexterm" id="iddle1639"/>products, brands, and channels, works with a number of
+        e-commerce companies. He says it’s essential for online retailers to
+        know what kind of relationship they have with their buyers, because
+        this drives everything from marketing strategy to shopping cart size.
+        To understand this, he calculates the <span class="emphasis"><em>annual repurchase
+        rate</em></span>: what percentage of people who bought something from
+        you last year will do so this year?</p><div class="variablelist"><dl><dt><span class="term"><span class="emphasis"><em>Acquisition mode</em></span></span></dt><dd><p>If less than 40% of last year’s buyers will buy this year,
+              then the focus of the business is on new customer acquisition.
+              Loyalty programs aren’t good long-term investments for this kind
+              of business. Kevin says that 70% of e-commerce businesses fall
+              into this category when they’re mature. Vendors of scuba or rock
+              climbing equipment might be a great example of this: many of
+              their customers buy gear once, and don’t get so hooked on the
+              hobby that they need to upgrade. That’s not a bad thing—it just
+              dictates marketing strategy. An online vendor of eyewear might
+              put more of its marketing efforts into convincing past buyers to
+              refer others, and less into convincing those buyers to purchase
+              multiple pairs of glasses, for example.</p></dd><dt><span class="term"><span class="emphasis"><em>Hybrid mode</em></span></span></dt><dd><p>If 40–60% of last year’s buyers will buy this year, then
+              the company will grow with a mix of new customers and returning
+              customers. It needs to focus on acquisition as well as on
+              increasing purchase frequency—the average customer will buy 2 to
+              2.5 times a year. Zappos is a hybrid model e-commerce
+              company.</p></dd><dt><span class="term"><span class="emphasis"><em>Loyalty mode</em></span></span></dt><dd><p>If 60% or more of last year’s buyers will buy something
+              this year, the company needs to focus on loyalty, encouraging
+              loyal clients to buy more frequently. Loyalty programs work well
+              only if the retailer has this kind of engagement, and only 10%
+              of e-commerce businesses end up in this mode when mature. Amazon
+              is a good example of a company in this mode.</p></dd></dl></div><p>The annual repurchase rate is an early indicator of how an
+        e-commerce startup will succeed in the long term. Even before a year
+        has elapsed, an e-commerce company can look at 90-day repurchase rates
+        and get a sense of which model it’s in.</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>A 90-day repurchase rate of 1% to 15% means you’re in
+            acquisition mode.</p></li><li class="listitem"><p><a class="indexterm" id="iddle1447"/><a class="indexterm" id="iddle1634"/><a class="indexterm" id="iddle1742"/><a class="indexterm" id="iddle1883"/><a class="indexterm" id="iddle2353"/>A 90-day repurchase rate of 15% to 30% means you’re
+            in hybrid mode.</p></li><li class="listitem"><p>A 90-day repurchase rate of over 30% means you’re in loyalty
+            mode.</p></li></ul></div><p>There’s nothing particularly bad about any of these models.
+        Kevin has clients where only 25% of this year’s buyers will purchase
+        something next year. These clients are successful because they know
+        they need a large number of new customers at relatively low costs, and
+        they concentrate all of their marketing efforts around reliable,
+        affordable customer acquisition.</p><p>“It doesn’t matter whatsoever what mode a business is in. But it
+        means <span class="emphasis"><em>everything</em></span> for the CEO to know what mode he
+        or she is in,” Kevin says. “I see too many leaders trying to increase
+        loyalty. If you’re in acquisition mode, you probably can’t—and
+        shouldn’t try to—increase loyalty. The average customer only needs a
+        couple of pairs of jeans a year, for instance. You can’t force the
+        customer to buy more! Knowing your customer and mode is really
+        important.”</p><p>Kevin says he frequently sees business leaders with seasonal
+        e-commerce properties trying to convince customers to buy gifts
+        off-season. “It doesn’t work,” he says. “They’re in acquisition mode.
+        They’re better off creating awareness during the year so that they get
+        new customers in November and December.”</p><p>While it’s important to optimize revenues, don’t try to make
+        your customers into something they’re not. “I don’t try to force my
+        customer to do things my customer isn’t pre-inclined to do. With
+        Zappos, for example, I wouldn’t necessarily try to push my customer
+        from hybrid mode to loyalty mode. But I do try to improve customer
+        service (free returns), and that brings in new customers (half of
+        hybrid mode success) who feel comfortable with my business,” says
+        Kevin. “If I am in acquisition mode, then I will still try to improve
+        service and merchandise and the like, but I know that my primary goal
+        is to always get new customers, even once my business is
+        mature.”</p><p>Kevin says it’s difficult to move the annual repurchase rate by
+        more than 10%, despite a company’s best efforts. “If the annual
+        repurchase rate is 30%, it will vary between 27% and 33%,” he
+        says.</p><p>With the rise of social networks and sites like Facebook and
+        Pinterest, which can refer visitors, e-commerce companies are
+        increasingly interested in a long funnel that begins with a tweet, a
+        video, or a link, and ends with a purchase. Online retailers need to
+        understand what messages, on what <a class="indexterm" id="iddle1338"/><a class="indexterm" id="iddle1490"/><a class="indexterm" id="iddle1688"/><a class="indexterm" id="iddle1906"/>platforms, generate the kinds of visitors who buy
+        things. Once they’re on the site, the emphasis is on maximizing the
+        amount of stuff a buyer will purchase.</p><p>Getting pricing right is critical—particularly if you’re an
+        acquisition-mode e-commerce site that gets only one chance to extract
+        revenue from a customer. A 1992 study on business optimization by
+        management consulting firm McKinsey compared the impact of improving
+        different aspects of the business on operating profit.<sup>[<a class="footnote" href="#ftn.ch08fn02" id="ch08fn02">26</a>]</sup></p><p>As <a class="xref" href="ch08.html#want_to_fix_your_businessquestion_mark_g" title="Figure 8-1. Want to fix your business? Get the price right">Figure 8-1</a>
+        illustrates, getting pricing right has a huge impact on the overall
+        profitability of a business. A later study conducted in 2003 suggested
+        a smaller impact of only 8%—but one that still far outstripped other
+        efforts.<sup>[<a class="footnote" href="#ftn.ch08fn03" id="ch08fn03">27</a>]</sup></p><div class="figure"><a id="want_to_fix_your_businessquestion_mark_g"/><div class="figure-contents"><div class="mediaobject"><a id="med_id00015"/><img alt="Want to fix your business? Get the price right" src="httpatomoreillycomsourceoreillyimages1989273.png"/></div></div><div class="figure-title">Figure 8-1. Want to fix your business? Get the price right</div></div></div><div class="sect1" title="A Practical Example"><div class="titlepage"><div><div><h2 class="title" id="practical_example" style="clear: both">A Practical Example</h2></div></div></div><p>Consider an online luxury goods store. Subscribers to the site
+        get exclusive deals at reduced prices for items that are curated by
+        the site’s operators. Visitors to the site can browse what’s
+        available, but must sign up to place an order or put something in a
+        shopping cart; by signing up, they agree to receive a daily email
+        update. Visitors can also tweet or like something they see on the
+        site.</p><p>The company cares about several key metrics:</p><div class="variablelist"><dl><dt><span class="term"><span class="emphasis"><em>Conversion rate</em></span></span></dt><dd><p><a class="indexterm" id="iddle1002"/><a class="indexterm" id="iddle1142"/><a class="indexterm" id="iddle1209"/><a class="indexterm" id="iddle1222"/><a class="indexterm" id="iddle1261"/><a class="indexterm" id="iddle1579"/><a class="indexterm" id="iddle1645"/><a class="indexterm" id="iddle1649"/><a class="indexterm" id="iddle1936"/><a class="indexterm" id="iddle1967"/><a class="indexterm" id="iddle2066"/><a class="indexterm" id="iddle2092"/><a class="indexterm" id="iddle2288"/>The number of visitors who buy something.</p></dd><dt><span class="term"><span class="emphasis"><em>Purchases per year</em></span></span></dt><dd><p>The number of purchases made by each customer per
+              year.</p></dd><dt><span class="term"><span class="emphasis"><em>Average shopping cart size</em></span></span></dt><dd><p>The amount of money spent on a purchase.</p></dd><dt><span class="term"><span class="emphasis"><em>Abandonment</em></span></span></dt><dd><p>The percentage of people who begin to make a purchase, and
+              then don’t.</p></dd><dt><span class="term"><span class="emphasis"><em>Cost of customer acquisition</em></span></span></dt><dd><p>The money spent to get someone to buy something.</p></dd><dt><span class="term"><span class="emphasis"><em>Revenue per customer</em></span></span></dt><dd><p>The lifetime value of each customer.</p></dd><dt><span class="term"><span class="emphasis"><em>Top keywords driving traffic to the
+            site</em></span></span></dt><dd><p>Those terms that people are looking for, and associate
+              with you—a clue to adjacent products or markets.</p></dd><dt><span class="term"><span class="emphasis"><em>Top search terms</em></span></span></dt><dd><p>Both those that lead to revenue, and those that don’t have
+              any results.</p></dd><dt><span class="term"><span class="emphasis"><em>Effectiveness of recommendation
+            engines</em></span></span></dt><dd><p>How likely a visitor is to add a recommended product to
+              the shopping cart.</p></dd><dt><span class="term"><span class="emphasis"><em>Virality</em></span></span></dt><dd><p>Word of mouth, and sharing per visitor.</p></dd><dt><span class="term"><span class="emphasis"><em>Mailing list effectiveness</em></span></span></dt><dd><p>Click-through rates and ability to make buyers return and
+              buy.</p></dd></dl></div><p>More sophisticated retailers care about other metrics such as
+        the number of reviews written or the number considered helpful, but
+        this is really a secondary business within the organization, and we’ll
+        deal with these when we look at the user-generated content model in
+        <a class="xref" href="ch12.html" title="Chapter 12. Model Five: User-Generated Content">Chapter 12</a>. For now, let’s
+        look at the preceding metrics in a bit more detail.</p><div class="sect2" title="Conversion Rate"><div class="titlepage"><div><div><h3 class="title" id="conversion_rate">Conversion Rate</h3></div></div></div><p><a class="indexterm" id="iddle1298"/><a class="indexterm" id="iddle2105"/>Conversion rate is simply the percentage of visitors
+          to your site who buy something. It’s one of the first metrics you
+          use to assess how you’re doing. It’s simple to calculate and
+          experiment with. You’ll slice conversion rate in many ways—by
+          demographics, by copy, by referral, and so on—to see what makes
+          people more likely to buy.</p><p>Early on, conversion rate may even be more important than
+          total revenue because your initial goal is to simply prove that
+          someone will buy something (and it gives you that person’s email
+          address and data on what he purchases). But there’s also a risk in
+          focusing too intensely on conversion rate. Conversion rate is highly
+          dependent on your type of e-commerce business, and whether your
+          success will be driven by loyalty, new customer acquisition, or a
+          hybrid of the two.</p></div><div class="sect2" title="Purchases Per Year"><div class="titlepage"><div><div><h3 class="title" id="purchases_per_year">Purchases Per Year</h3></div></div></div><p>While conversion rate is important, it doesn’t tell the whole
+          story. There are many examples of e-commerce sites with high or low
+          conversion rates that are successful. It depends on the type of
+          e-commerce site and how people buy. A store that sells coffins
+          probably sells only one per lifetime; a grocery store sells to a
+          customer several times a week.</p><p>If you look at the repurchase rate on a 90-day cycle, it
+          becomes a very good leading indicator for what type of e-commerce
+          site you have. There’s no right or wrong answer, but it is important
+          to know whether to focus more on loyalty or more on
+          acquisition.</p></div><div class="sect2" title="Shopping Cart Size"><div class="titlepage"><div><div><h3 class="title" id="shopping_cart_size">Shopping Cart Size</h3></div></div></div><p>The other half of the conversion rate equation is the size of
+          the shopping cart. Not only do you want to know what percentage of
+          people bought something, you also want to know how much they spent.
+          You may find that one campaign is more likely to make people buy,
+          but another might make fewer people spend more money.</p><p>In practice, you’ll compare the total revenue you’re
+          generating to the way in which you acquired that revenue, in order
+          to identify the most lucrative segments of your reachable audience.
+          But don’t get too caught up in top-line revenue; profit is what
+          really matters.</p><p>Bill D’Alessandro of Skyway Ventures, a private investment
+          firm focused on e-commerce companies, says, “The key to successful
+          e-commerce is in increasing shopping cart size; that’s really where
+          the money is made. I like to think of customer acquisition cost as a
+          fixed cost, so any increase in order size is expanding your
+          margin.”</p></div><div class="sect2" title="Abandonment"><div class="titlepage"><div><div><h3 class="title" id="abandonment">Abandonment</h3></div></div></div><p><a class="indexterm" id="iddle1003"/><a class="indexterm" id="iddle1143"/><a class="indexterm" id="iddle1204"/><a class="indexterm" id="iddle1223"/><a class="indexterm" id="iddle1494"/>Not everyone buys something. At its simplest,
+          abandonment rate is the opposite of conversion rate. But a
+          purchasing process often has several steps—reviewing items in a
+          shopping cart, providing shipping information, entering billing
+          details, and so on. In some cases, the process may even involve a
+          third-party site: Kickstarter sends users to Amazon to provide their
+          credit card information, and Eventbrite links to PayPal so buyers
+          can pay for tickets.</p><p>The number of people who abandon a funnel at each of these
+          stages is the abandonment rate. It’s important to analyze it for
+          each step in order to see which parts of the process are hurting you
+          the most. In some cases, this may be a particular form field—for
+          example, asking people for their nationality could be alienating
+          buyers. Tools like ClickTale perform abandonment analysis within the
+          form itself, making it easier to pinpoint bottlenecks in the
+          conversion process where you’re losing customers.</p></div><div class="sect2" title="Cost of Customer Acquisition"><div class="titlepage"><div><div><h3 class="title" id="cost_of_customer_acquisition">Cost of Customer Acquisition</h3></div></div></div><p>Once you know you can extract money from visitors, you’ll want
+          to drive traffic to the site. You may be using advertising, social
+          media outreach, mailing lists, or affiliates. Whatever the case,
+          you’re going to need to add it up. E-commerce sites are simple math:
+          make more from selling things than it costs you to find buyers and
+          deliver the goods.</p><p>Accounting for the cost of acquisition in aggregate is fairly
+          easy; it’s more complicated when you have myriad channels driving
+          traffic to your site. The good news is that analytics tools were
+          literally built to do this for you. The reason Google has a free
+          analytics product is because the company makes money from relevant
+          advertising, and wants to make it as easy as possible for you to buy
+          ads and measure their effectiveness.</p></div><div class="sect2" title="Revenue Per Customer"><div class="titlepage"><div><div><h3 class="title" id="revenue_per_customer">Revenue Per Customer</h3></div></div></div><p>Revenue per customer (or lifetime value) is important for all
+          types of e-commerce businesses, regardless of whether you’re focused
+          on new customer acquisition or loyalty (or both). Even if your
+          business doesn’t engender loyalty (because you’re selling something
+          that’s infrequently purchased), you want to maximize revenue per
+          customer; you do so by increasing shopping cart size and conversion
+          while reducing abandonment. Revenue per customer is really an
+          aggregate metric of other key numbers, and represents a good, single
+          measure of your e-commerce business’s health.</p></div></div><div class="sect1 case_study" title="WineExpress Increases Revenue by 41% Per Visitor"><div class="titlepage"><div><div><h2 class="title" id="case_study_wineexpress_increases_revenue" style="clear: both">WineExpress Increases Revenue by 41% Per Visitor</h2></div></div></div><p><a class="indexterm" id="iddle1006"/><a class="indexterm" id="iddle1233"/><a class="indexterm" id="iddle1349"/><a class="indexterm" id="iddle1504"/><a class="indexterm" id="iddle2319"/><a class="indexterm" id="iddle2329"/>WineExpress.com is the exclusive wine shop partner of
+        the Wine Enthusiast catalog and website, which have been providing
+        quality wine accessories and storage for over 30 years. The company
+        actively A/B tests and runs different experiments to improve sales
+        conversions.</p><p>It decided to tackle one of the most highly trafficked pages on
+        its site—the “Wine of the Day” page—which features a single wine
+        option that ships for just 99 cents. The company drives traffic to the
+        page through an opt-in email list and site navigation. The page’s
+        central focus, aside from the featured product, is a virtual
+        wine-tasting video with the company’s highly regarded wine
+        director.</p><p>The “Wine of the Day” page already converted well, but
+        WineExpress.com felt there was an opportunity to improve it. However,
+        the team was well aware of the challenge which is faced by all
+        e-commerce sites: striking a balance between optimizing sales
+        transactions and optimizing overall revenues. Focusing too much on
+        sales conversions may negatively impact the bottom line if the average
+        order size drops in the process.</p><p>WineExpress.com engaged conversion optimization agency
+        WiderFunnel Marketing to develop and execute a strategy for the “Wine
+        of the Day” page. WiderFunnel developed and tested three design
+        variations, aiming mostly at testing different layout approaches.
+        <a class="xref" href="ch08.html#original_wineexpress_quotation_markwine" title="Figure 8-2. The original WineExpress “Wine of the Day” page">Figure 8-2</a> shows the
+        original layout.</p><p>In the end, one of the variations was a clear winner, leading to
+        a 41% increase in revenue per visitor. “Conversion also went up,” says
+        Chris Goward, CEO of WiderFunnel, “but the key here is that revenue
+        per visitor went up substantially. A lot of e-commerce vendors focus
+        too much on conversion. For WineExpress.com the success is that people
+        bought substantially more product.”</p><div class="figure"><a id="original_wineexpress_quotation_markwine"/><div class="figure-contents"><div class="mediaobject"><a id="med_id00016"/><img alt="The original WineExpress “Wine of the Day” page" src="httpatomoreillycomsourceoreillyimages1989274.png.jpg"/></div></div><div class="figure-title">Figure 8-2. The original WineExpress “Wine of the Day” page</div></div><p>The winning layout and design is shown in <a class="xref" href="ch08.html#how_would_41percent_more_revenue_per_vis" title="Figure 8-3. How would 41% more revenue per visitor change your business?">Figure 8-3</a>.</p><div class="figure"><a id="how_would_41percent_more_revenue_per_vis"/><div class="figure-contents"><div class="mediaobject"><a id="med_id00017"/><img alt="How would 41% more revenue per visitor change your business?" src="httpatomoreillycomsourceoreillyimages1989275.png.jpg"/></div></div><div class="figure-title">Figure 8-3. How would 41% more revenue per visitor change your
+          business?</div></div><p><a class="indexterm" id="iddle1505"/>“We found that placing the video above the fold was a
+        key element in the success of the new page,” says Chris. “The eyeflow
+        of the new layout also improved clarity, with fewer distracting
+        elements that could draw you away from purchasing.”</p><p><a class="indexterm" id="iddle1102"/><a class="indexterm" id="iddle1356"/><a class="indexterm" id="iddle1500"/><a class="indexterm" id="iddle1580"/><a class="indexterm" id="iddle2064"/><a class="indexterm" id="iddle2065"/><a class="indexterm" id="iddle2067"/><span class="strong"><strong>Summary</strong></span></p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>WineExpress.com used A/B testing to find a better-converting
+            page.</p></li><li class="listitem"><p>While conversion went up, the real gain was a 41% increase
+            in revenue per visitor.</p></li></ul></div><p><span class="strong"><strong>Analytics Lessons
+        Learned</strong></span></p><p>Page optimization is important. But be sure you’re optimizing
+        the right metric. You don’t just want a high conversion rate—though
+        that’s good. You want high <span class="emphasis"><em>revenue per visitor</em></span>,
+        or <span class="emphasis"><em>high customer lifetime value</em></span> (CLV), because
+        that’s what’s really driving your business model.</p><div class="sect2" title="Keywords and Search Terms"><div class="titlepage"><div><div><h3 class="title" id="keywords_and_search_terms">Keywords and Search Terms</h3></div></div></div><p>Most people find products by searching for them, whether
+          that’s in a web browser, on a search engine, or within a site. In
+          each case, you want to know which keywords drive traffic that turns
+          into money.</p><p>For paid search, you’re going to be bidding against others for
+          popular keywords in search engines like Google. Understanding which
+          words are a comparatively good “value”—not too expensive, but still
+          able to drive a reasonable amount of traffic—is what search engine
+          marketing professionals do for a living.</p><p>For unpaid search, you’ll be more focused on good, compelling
+          content that improves your ranking with search engines, and on
+          writing copy that includes the desirable search terms your paying
+          customers tend to use (so you’ll be featured in search results
+          because of your relevance).</p><p>You also want to analyze search <span class="emphasis"><em>within</em></span>
+          your site. First, you want to be sure you have what people are
+          after. If users are searching for something and not finding it—or
+          searching, then pressing the back button—that’s a sign that you
+          don’t have what they want. Second, if a significant chunk of
+          searches fall into a particular category, that’s a sign that you
+          might want to alter your positioning, or add that category to the
+          home page, to see if you can capture more of that market faster.
+          Jason Billingsley, former VP of Innovation at Elastic Path, an
+          enterprise e-commerce platform vendor, says, “Numbers vary by
+          vertical and by site, but on-site search tools typically account for
+          5–15% of navigation.”</p><p>We’re not going to get into the details of search engine
+          optimization and search engine marketing here—those are worlds unto
+          themselves. For now, realize that search is a significant part of
+          any e-commerce operation, and <a class="indexterm" id="iddle1210"/><a class="indexterm" id="iddle1361"/><a class="indexterm" id="iddle1646"/><a class="indexterm" id="iddle1650"/><a class="indexterm" id="iddle1898"/><a class="indexterm" id="iddle1968"/><a class="indexterm" id="iddle2113"/><a class="indexterm" id="iddle2246"/><a class="indexterm" id="iddle2289"/><a class="indexterm" id="iddle2325"/>the old model of formal navigational steps toward a
+          particular page is outdated (even though it remains in many
+          analytics tools).</p></div><div class="sect2" title="Recommendation Acceptance Rate"><div class="titlepage"><div><div><h3 class="title" id="recommendation_acceptance_rate">Recommendation Acceptance Rate</h3></div></div></div><p>Big e-commerce companies use recommendation engines to suggest
+          additional items to visitors. Today, these engines are becoming more
+          widespread thanks to third-party recommendation services that work
+          with smaller retailers. Even bloggers have this kind of algorithm,
+          suggesting other articles similar to the one the visitor is
+          currently reading.</p><p>There are many different approaches to recommendations. Some
+          use what the buyer has purchased in the past; others try to predict
+          purchases from visitor attributes like geography, referral, or what
+          the visitor has clicked so far. Predictive analysis of visitors
+          relies heavily on machine learning, and the metrics you’ll track
+          will vary from tool to tool, but they all boil down to one thing:
+          <span class="emphasis"><em>how much additional revenue am I generating through
+          recommendations?</em></span></p><p>When you make adjustments to the recommendation engine, you’ll
+          want to see if you moved the needle in the right direction.</p></div><div class="sect2" title="Virality"><div class="titlepage"><div><div><h3 class="title" id="virality">Virality</h3></div></div></div><p>For many e-commerce sites, virality is important, because
+          referral and viral attention drives cheap, high-value traffic. It
+          has the lowest cost of customer acquisition and the highest implied
+          recommendation from someone the recipient trusts.</p></div><div class="sect2" title="Mailing List Click-Through Rates"><div class="titlepage"><div><div><h3 class="title" id="mailing_list_click-through_rates">Mailing List Click-Through Rates</h3></div></div></div><p>Email might not seem particularly sexy in a mobile, always-on
+          world. But consider this: if you have the permission to reach out to
+          your customers—and they do what you tell them to—you can keep them
+          engaged far more effectively. Fred Wilson, partner at venture
+          capital firm Union Square Ventures, calls email a secret
+          weapon.<sup>[<a class="footnote" href="#ftn.ch08fn04" id="ch08fn04">28</a>]</sup></p><p>Just a few years ago, many analysts and investors were
+          wondering whether social media was going to lead to the end of
+          email. In an ironic twist of fate, it turns out that social media
+          adoption is driven by email. More and more social applications are
+          leveraging the power of email to drive repeat usage and
+          retention.</p><p><a class="indexterm" id="iddle1155"/><a class="indexterm" id="iddle1156"/>Every email you send can be blocked in many ways
+          before a user does something you want, as shown in <a class="xref" href="ch08.html#every_email_runs_this_gauntletsemicolon" title="Figure 8-4. Every email runs this gauntlet; is it any wonder your click-throughs are low?">Figure 8-4</a>.</p><div class="figure"><a id="every_email_runs_this_gauntletsemicolon"/><div class="figure-contents"><div class="mediaobject"><a id="med_id00018"/><img alt="Every email runs this gauntlet; is it any wonder your click-throughs are low?" src="httpatomoreillycomsourceoreillyimages1989276.png"/></div></div><div class="figure-title">Figure 8-4. Every email runs this gauntlet; is it any wonder your
+            click-throughs are low?</div></div><p>Even those who respond to the call to action within a message
+          might not do something useful once they get to your website. In some
+          cases, the unsubscribe rate caused by a bad email can overshadow any
+          profit from the campaign, so email is a tool to use
+          carefully.</p><p>You calculate the email click-through rate by dividing the
+          number of visits you get from a campaign by the number of messages
+          you’ve sent. A more sophisticated analysis of email click-through
+          rate will include a breakdown of the various places where things can
+          go wrong—for example, what percentage of email addresses didn’t work
+          anymore—and a look at the eventual outcome you’re after (such as a
+          purchase).</p><p>You also need to create a campaign contribution
+          metric—basically, the added revenue from the campaign, minus the
+          cost of the campaign and the loss due to unsubscribes. The good news
+          is that most email platforms include this data with minimal
+          effort.</p></div></div><div class="sect1" title="Offline and Online Combinations"><div class="titlepage"><div><div><h2 class="title" id="offline_and_online_combinations" style="clear: both">Offline and Online Combinations</h2></div></div></div><p><a class="indexterm" id="iddle1104"/><a class="indexterm" id="iddle1343"/><a class="indexterm" id="iddle1344"/><a class="indexterm" id="iddle1346"/><a class="indexterm" id="iddle1348"/><a class="indexterm" id="iddle2088"/><a class="indexterm" id="iddle2089"/><a class="indexterm" id="iddle2164"/>All e-commerce vendors have to deliver something to
+        buyers. That delivery may be electronic, but in most cases, it means
+        moving physical goods around. Not only do high shipping costs reduce
+        conversion rates, but successful, timely delivery is also a huge
+        factor in buyer satisfaction and repeat purchases. Offline components
+        of any e-commerce business need to be analyzed carefully.</p><div class="sect2" title="Shipping Time"><div class="titlepage"><div><div><h3 class="title" id="shipping_time">Shipping Time</h3></div></div></div><p>Real-time delivery and next-day shipping are increasingly
+          common, and buyers are becoming more demanding. Shipping time is
+          key, and it’s tightly linked to how effectively the retailer handles
+          logistics. E-commerce companies can most likely achieve significant
+          operational efficiencies just by optimizing their fulfillment and
+          shipping processes. These efficiencies turn into a competitive
+          advantage, because they let you sell to consumers who are more
+          interested in faster, better-quality service than the cheapest
+          price.</p></div><div class="sect2" title="Stock Availability"><div class="titlepage"><div><div><h3 class="title" id="stock_availability">Stock Availability</h3></div></div></div><p>“When items are out of stock, sales go down,” says Jason
+          Billingsley. “Of course that’s obvious, but few e-commerce vendors
+          do anything about it.” Improving your inventory management can make
+          a big difference to your bottom line. Jason recommends lowering
+          out-of-stock items on product list or category pages, effectively
+          hiding them from consumers. You can also hide these items from
+          searches, or again, make sure they appear lower in the search
+          results.</p><p>It’s also interesting to analyze inventory versus sales. “A
+          lot of e-commerce vendors hold too much inventory for things that
+          don’t sell well, and not enough for things that do sell well,” says
+          Jason. He recommends aligning product categories based on how much
+          they make up of sales versus inventory. If you’re not selling a lot
+          in a product category, but that group of products makes up a high
+          percentage of your inventory, things are out of balance.</p></div></div><div class="sect1" title="Visualizing the E-commerce Business"><div class="titlepage"><div><div><h2 class="title" id="visualizing_the_e-commerce_business" style="clear: both">Visualizing the E-commerce Business</h2></div></div></div><p><a class="xref" href="ch08.html#more_than_a_typical_funnel_how_e-commerc" title="Figure 8-5. More than a typical funnel: how e-commerce businesses acquire customers">Figure 8-5</a>
+        represents a user’s flow through an e-commerce business, along with
+        the key metrics at each stage.</p><div class="figure"><a id="more_than_a_typical_funnel_how_e-commerc"/><div class="figure-contents"><div class="mediaobject"><a id="med_id00019"/><img alt="More than a typical funnel: how e-commerce businesses acquire customers" src="httpatomoreillycomsourceoreillyimages1989277.png"/></div></div><div class="figure-title">Figure 8-5. More than a typical funnel: how e-commerce businesses acquire
+          customers</div></div></div><div class="sect1" title="Wrinkles: Traditional E-commerce Versus Subscription E-commerce"><div class="titlepage"><div><div><h2 class="title" id="wrinkles_traditional_e-commerce_versus_s" style="clear: both">Wrinkles: Traditional E-commerce Versus Subscription
+        E-commerce</h2></div></div></div><p><a class="indexterm" id="iddle1185"/><a class="indexterm" id="iddle1337"/><a class="indexterm" id="iddle1347"/><a class="indexterm" id="iddle1350"/><a class="indexterm" id="iddle2169"/>So far, we’ve looked at a relatively simple e-commerce
+        model involving a one-time purchase. Plenty of services, however, are
+        subscription-based. This complicates things.</p><p>Subscription services bill the customer on a regular basis.
+        Churn is easier to measure—the customer doesn’t renew his account or
+        cancels outright—but happens more dramatically. Rather than a gradual
+        reduction in purchases over time, the customer’s revenue simply stops.
+        If this is you, check out the following business model—Software as a
+        Service—because it applies to you as well.</p><p>Phone companies devote considerable effort to tackling this kind
+        of churn. They build sophisticated models that predict when a
+        subscriber is about to cancel her service, and then offer her a new
+        phone or a discount on a renewed contract just before the cancellation
+        happens.</p><p>Expired payment information is also a concern for subscriptions.
+        If you try to charge a customer’s credit card for his monthly renewal
+        and the transaction fails, you have to convince him to re-enter
+        payment details.</p><p>From an analytics perspective, this means tracking additional
+        metrics for the rate of payment expiration, the effectiveness of
+        renewal campaigns, and the factors that help (or hinder) renewal
+        rates. These metrics matter later on as you’re working to reduce
+        churn, but as the total number of loyal users grows, renewal revenue
+        represents a significant portion of total revenue.</p></div><div class="sect1" title="Key Takeaways"><div class="titlepage"><div><div><h2 class="title" id="key_takeaways" style="clear: both">Key Takeaways</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>It’s vital to know if you’re focused on loyalty or
+            acquisition. This drives your whole marketing strategy and many of
+            the features you build.</p></li><li class="listitem"><p>Searches, both off- and on-site, are an increasingly common
+            way of finding something for purchase.</p></li><li class="listitem"><p>While conversion rates, repeat purchases, and transaction
+            sizes are important, the ultimate metric is the product of the
+            three of them: revenue per customer.</p></li><li class="listitem"><p>Don’t overlook real-world considerations like shipping,
+            warehouse logistics, and inventory.</p></li></ul></div><p>There’s another business model that’s close to e-commerce:
+        two-sided marketplaces. Both models are concerned with transactions
+        between a buyer and a seller, and the loyalty of customers. If you
+        want to learn more about marketplaces, head to <a class="xref" href="ch13.html" title="Chapter 13. Model Six: Two-Sided Marketplaces">Chapter 13</a>. Otherwise, you can move
+        on to <a class="xref" href="ch14.html" title="Chapter 14. What Stage Are You At?">Chapter 14</a> to
+        understand how your current stage affects the metrics you
+        watch.</p></div><div class="footnotes" epub:type="footnotes"><br/><hr style="width: 100; align: left;"/><div class="footnote" id="ftn.ch08fn01"><p><sup>[<a class="para" href="#ch08fn01">25</a>] </sup>In his post “Amazon’s $23,698,655.93 book about flies,” UC
+          Berkeley biologist Michael Eisen explains how algorithmic price wars
+          between book merchants drove the price of a textbook on flies up to
+          $23 million dollars (<span class="emphasis"><em><a class="ulink" href="http://www.michaeleisen.org/blog/?p=358" target="_top">http://www.michaeleisen.org/blog/?p=358</a></em></span>).</p></div><div class="footnote" id="ftn.ch08fn02"><p><sup>[<a class="para" href="#ch08fn02">26</a>] </sup><span class="emphasis"><em><a class="ulink" href="http://hbr.org/1992/09/managing-price-gaining-profit/ar/8" target="_top">http://hbr.org/1992/09/managing-price-gaining-profit/ar/8</a></em></span></p></div><div class="footnote" id="ftn.ch08fn03"><p><sup>[<a class="para" href="#ch08fn03">27</a>] </sup><span class="emphasis"><em><a class="ulink" href="http://download.mckinseyquarterly.com/popr03.pdf" target="_top">http://download.mckinseyquarterly.com/popr03.pdf</a></em></span></p></div><div class="footnote" id="ftn.ch08fn04"><p><sup>[<a class="para" href="#ch08fn04">28</a>] </sup><span class="emphasis"><em><a class="ulink" href="http://www.avc.com/a_vc/2011/05/social-medias-secret-weapon-email.html" target="_top">http://www.avc.com/a_vc/2011/05/social-medias-secret-weapon-email.html</a></em></span></p></div></div></section></body></html>
