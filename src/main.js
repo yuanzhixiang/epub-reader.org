@@ -380,7 +380,13 @@ import {
       activeTocLink = link;
       link.classList.add("active");
 
-      renderSelectedChapters(refs, chapterByPath);
+      var firstRef = refs[0] || null;
+      var focusPath = firstRef ? firstRef.path : "";
+      var focusFragment = firstRef ? (firstRef.fragment || "") : "";
+      renderSelectedChapters(refs, chapterByPath, { skipTopScroll: !!focusFragment });
+      if (focusPath && focusFragment) {
+        scrollToContentTarget(focusPath, remapFragmentForPath(focusPath, focusFragment, allIdMapByPath));
+      }
       var chapterCount = 0;
       for (var i = 0; i < refs.length; i += 1) {
         if (!refs[i].continuation) {
@@ -473,13 +479,7 @@ import {
     event.preventDefault();
 
     var targetPath = normalizePath(ref.path || sourcePath || "");
-    var targetFragment = ref.fragment || "";
-    if (targetPath && targetFragment) {
-      var idMap = allIdMapByPath.get(targetPath);
-      if (idMap && idMap.has(targetFragment)) {
-        targetFragment = idMap.get(targetFragment);
-      }
-    }
+    var targetFragment = remapFragmentForPath(targetPath, ref.fragment || "", allIdMapByPath);
 
     if (!targetPath && targetFragment) {
       targetPath = findChapterPathByFragment(targetFragment, allIdMapByPath);
@@ -530,6 +530,17 @@ import {
     return true;
   }
 
+  function remapFragmentForPath(path, fragment, idMapByPath) {
+    if (!path || !fragment || !idMapByPath) {
+      return fragment || "";
+    }
+    var idMap = idMapByPath.get(path);
+    if (!idMap || !idMap.has(fragment)) {
+      return fragment;
+    }
+    return idMap.get(fragment);
+  }
+
   function findNextBoundaryPath(items, index, tocBaseDir, sectionByPath, idMapByPath, fallbackBoundaryPath) {
     for (var i = index + 1; i < items.length; i += 1) {
       var nextPath = findFirstChapterPathInItem(items[i], tocBaseDir, sectionByPath, idMapByPath);
@@ -575,11 +586,12 @@ import {
         return;
       }
 
-      var path = resolveChapterPathFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath);
-      if (path && !seen.has(path)) {
-        seen.add(path);
+      var target = resolveChapterTargetFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath);
+      if (target.path && !seen.has(target.path)) {
+        seen.add(target.path);
         refs.push({
-          path: path,
+          path: target.path,
+          fragment: target.fragment || "",
           title: cleanText(node.title || ""),
           continuation: false
         });
@@ -593,20 +605,31 @@ import {
   }
 
   function resolveChapterPathFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath) {
+    var target = resolveChapterTargetFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath);
+    return target.path;
+  }
+
+  function resolveChapterTargetFromTocNode(node, tocBaseDir, sectionByPath, idMapByPath) {
     if (!node) {
-      return "";
+      return { path: "", fragment: "" };
     }
     var ref = resolveTargetRef(tocBaseDir, node.href || "");
     if (ref.external) {
-      return "";
+      return { path: "", fragment: "" };
     }
     if (ref.path && sectionByPath.has(ref.path)) {
-      return ref.path;
+      return {
+        path: ref.path,
+        fragment: ref.fragment || ""
+      };
     }
     if (!ref.path && ref.fragment) {
-      return findChapterPathByFragment(ref.fragment, idMapByPath);
+      return {
+        path: findChapterPathByFragment(ref.fragment, idMapByPath),
+        fragment: ref.fragment || ""
+      };
     }
-    return "";
+    return { path: "", fragment: "" };
   }
 
   function collectChapterRefsFromItem(rootItem, tocBaseDir, sectionByPath, idMapByPath, spinePaths, spineIndexByPath, boundaryPath) {
@@ -658,6 +681,7 @@ import {
         seen.add(path);
         refs.push({
           path: path,
+          fragment: k === startIdx ? (anchor.fragment || "") : "",
           title: k === startIdx ? anchor.title : "",
           continuation: k !== startIdx
         });
